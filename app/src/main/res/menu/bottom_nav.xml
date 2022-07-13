@@ -14,11 +14,11 @@
 
     <item android:id="@+id/notificationFragment"
         android:title="@string/notification"
-        android:icon="@drawable/history_icon_selector"/>
+        android:icon="@drawable/notification_icon_selector"/>
 
     <item android:id="@+id/profileFragment"
         android:title="@string/profile"
-        android:icon="@drawable/history_icon_selector"/>
+        android:icon="@drawable/profile_icon_selector"/>
 
 
 </menu>
