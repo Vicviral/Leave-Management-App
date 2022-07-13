@@ -16,4 +16,12 @@
         android:id="@+id/applicationFragment"
         android:name="com.victorloveday.leavemanager.ui.fragments.ApplicationFragment"
         android:label="ApplicationFragment" />
+    <fragment
+        android:id="@+id/notificationFragment2"
+        android:name="com.victorloveday.leavemanager.ui.fragments.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.victorloveday.leavemanager.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

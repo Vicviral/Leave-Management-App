@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         //set bottom nav color to invisible && disable middle icon on bottom nav
         binding.bottomNavigationView.background = null
-        binding.bottomNavigationView.menu.getItem(1).isEnabled = false
+        binding.bottomNavigationView.menu.getItem(2).isEnabled = false
         binding.bottomNavigationView.itemIconTintList = null
 
 

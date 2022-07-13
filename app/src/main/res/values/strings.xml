@@ -4,4 +4,6 @@
     <string name="history">History</string>
     <string name="apply_for_leave">apply for leave</string>
     <string name="space">Space</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
 </resources>
