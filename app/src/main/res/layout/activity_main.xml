@@ -45,6 +45,7 @@
         android:id="@+id/applyForLeave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:borderWidth="0dp"
         android:contentDescription="@string/apply_for_leave"
         android:backgroundTint="@color/orange"
         android:src="@drawable/ic_baseline_add_24"
