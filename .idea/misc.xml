@@ -9,9 +9,19 @@
         <entry key="app/src/main/res/drawable-v24/ic_history_unselected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_home_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_home_unselected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable-v24/ic_notification_unselected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable-v24/ic_profile_unselected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable-v24/notification_icon_selector.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable-v24/profile_icon_selector.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_history_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_home_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_home_unselected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/ic_notification_selected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/ic_notification_unselected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/ic_profile_selected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/ic_profile_unselected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/layout/activity_leave_application.xml" value="0.22864583333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_application.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.24270833333333333" />

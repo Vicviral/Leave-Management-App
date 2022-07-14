@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 
-class HomeFragment: Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
 

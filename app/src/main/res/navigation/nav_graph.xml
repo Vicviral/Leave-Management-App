@@ -13,10 +13,6 @@
         android:name="com.victorloveday.leavemanager.ui.fragments.HistoryFragment"
         android:label="Leaves" />
     <fragment
-        android:id="@+id/applicationFragment"
-        android:name="com.victorloveday.leavemanager.ui.fragments.ApplicationFragment"
-        android:label="Apply" />
-    <fragment
         android:id="@+id/notificationFragment"
         android:name="com.victorloveday.leavemanager.ui.fragments.NotificationFragment"
         android:label="Notification" />
