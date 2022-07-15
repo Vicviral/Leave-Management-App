@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_profile_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_profile_unselected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/pending_bg.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/share_bg.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/layout/activity_leave_application.xml" value="0.22864583333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_application.xml" value="0.24270833333333333" />
@@ -33,6 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/layout/item_history.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.24270833333333333" />
       </map>
     </option>
