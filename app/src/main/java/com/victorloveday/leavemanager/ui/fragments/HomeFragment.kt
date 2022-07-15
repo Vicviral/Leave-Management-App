@@ -1,14 +1,17 @@
 package com.victorloveday.leavemanager.ui.fragments
 
+import HistoryAdapter
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorloveday.leavemanager.R
-import com.victorloveday.leavemanager.adapters.HistoryAdapter
 import com.victorloveday.leavemanager.api.RetrofitInstance
+import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.LeaveResponse
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
@@ -28,15 +31,35 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        leaveViewModel = ViewModelProvider(this).get(LeaveViewModel::class.java)
-        historyAdapter = HistoryAdapter(requireContext())
+        leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
-        fetchUserLeaveHistoryFromAPI()
+//        fetchUserLeaveHistoryFromAPI()
+
+        setupHistoryRecyclerView()
 
         //set backgrounds for colors
         binding.cancelLeave.setBackgroundResource(R.drawable.cancel_btn_bg)
         binding.editLeave.setBackgroundResource(R.drawable.edit_btn_bg)
         disablePendingLeaveButtons()
+    }
+
+    private fun setupHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
+
+        val leave = Leave(0, "Going for a trip", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Pending")
+        leaveViewModel.saveLeave(leave)
+
+        historyAdapter = HistoryAdapter(requireContext())
+        adapter = historyAdapter
+        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty()) {
+                historyAdapter.setData(it)
+            } else {
+                Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
     }
 
