@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toTopOf="@id/dateIcon" />
 
             <TextView
-                android:id="@+id/duration"
+                android:id="@+id/leaveDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -99,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@id/dateIcon" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/shareIcon"
+                android:id="@+id/shareLeaveDetailsIcon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="20dp"

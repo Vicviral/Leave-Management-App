@@ -9,6 +9,6 @@ interface LeaveApi {
 
     @GET("history")
     suspend fun getLeaves(
-        @Query("id") country: String
+        @Query("userId") userId: String
     ): Response<LeaveResponse>
 }

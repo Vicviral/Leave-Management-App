@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(
-    tableName = "articles"
+    tableName = "leaves_table"
 )
 data class Leave(
     @PrimaryKey(autoGenerate = true)

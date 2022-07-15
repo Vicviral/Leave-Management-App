@@ -1,32 +1,24 @@
 package com.victorloveday.leavemanager.api
 
-import com.example.newdo.utils.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
-class RetrofitInstance {
+object RetrofitInstance {
 
-    companion object {
-        private val retrofit by lazy {
-            //for debugging purpose
-            val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+    private val client = OkHttpClient.Builder()
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .build()
 
-            val networkClient = OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build()
-
-            Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(networkClient)
-                .build()
-        }
-
-        val api by lazy {
-            retrofit.create(LeaveApi::class.java)
-        }
+    val api : LeaveApi by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://steamledge.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(LeaveApi::class.java)
     }
 }

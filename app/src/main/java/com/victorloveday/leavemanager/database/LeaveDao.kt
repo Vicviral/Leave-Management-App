@@ -8,12 +8,15 @@ import com.victorloveday.leavemanager.database.model.Leave
 interface LeaveDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(leave: Leave): Long
-
-    @Query("SELECT * FROM articles")
-    fun getAllLeaves(): LiveData<List<Leave>>
+    suspend fun saveLeave(leave: Leave): Long
 
     @Delete
     suspend fun deleteLeave(leave: Leave)
+
+    @Query("SELECT * FROM leaves_table ORDER BY id DESC")
+    fun getAllLeaveHistory(): LiveData<List<Leave>>
+
+    @Query("SELECT * FROM leaves_table WHERE `leaveType` = :leaveType")
+    fun getLeaveHistoryByLeaveType(leaveType: String): LiveData<List<Leave>>
 
 }
