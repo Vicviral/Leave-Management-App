@@ -1,9 +1,11 @@
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.ItemHistoryBinding
 
@@ -46,6 +48,18 @@ class HistoryAdapter(private val context: Context) :
             leaveDescription.text = leave.reason
             leaveStatus.text = leave.status
             leaveDuration.text = "${leave.startDate} - ${leave.endDate}"
+
+            //set status color
+            when(leave.status) {
+                "Declined" -> {
+                    leaveStatus.setBackgroundResource(R.drawable.declined_bg)
+                    leaveStatus.setTextColor(Color.parseColor("#FFCC0000"))
+                }
+                "Approved" -> {
+                    leaveStatus.setBackgroundResource(R.drawable.approved_bg)
+                    leaveStatus.setTextColor(Color.parseColor("#3DD598"))
+                }
+            }
 
             holder.itemView.apply {
                 setOnLongClickListener {
