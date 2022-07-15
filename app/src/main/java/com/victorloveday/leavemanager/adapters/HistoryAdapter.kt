@@ -51,6 +51,10 @@ class HistoryAdapter(private val context: Context) :
 
             //set status color
             when(leave.status) {
+                "Pending" -> {
+                    leaveStatus.setBackgroundResource(R.drawable.pending_bg)
+                    leaveStatus.setTextColor(Color.parseColor("#F76332"))
+                }
                 "Declined" -> {
                     leaveStatus.setBackgroundResource(R.drawable.declined_bg)
                     leaveStatus.setTextColor(Color.parseColor("#FFCC0000"))

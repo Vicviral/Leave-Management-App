@@ -6,4 +6,7 @@
     <string name="space">Space</string>
     <string name="notification">Notification</string>
     <string name="profile">Profile</string>
+    <string name="sick">Sick</string>
+    <string name="casual">Casual</string>
+    <string name="all">All</string>
 </resources>

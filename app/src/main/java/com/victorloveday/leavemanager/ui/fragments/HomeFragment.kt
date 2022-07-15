@@ -38,7 +38,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 //        fetchUserLeaveHistoryFromAPI()
 
-        setupHistoryRecyclerView()
+        setupRecentHistoryRecyclerView()
 
         //set backgrounds for colors
         binding.cancelLeave.setBackgroundResource(R.drawable.cancel_btn_bg)
@@ -47,7 +47,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun setupHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
+    private fun setupRecentHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
 
         //for demo purpose
 //        val leave = Leave(0, "Going to the beach", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Declined")
@@ -63,8 +63,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (it.isNotEmpty()) {
 
                 if (it.size > 1) {
-                    val slideFromRight =
-                        AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+                    val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
                     binding.recentLeavesRecyclerView.startAnimation(slideFromRight)
                     Handler(Looper.getMainLooper()).postDelayed({
                         (layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, -200)

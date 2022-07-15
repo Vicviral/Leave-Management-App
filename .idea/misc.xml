@@ -14,8 +14,12 @@
         <entry key="app/src/main/res/drawable-v24/ic_profile_unselected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable-v24/notification_icon_selector.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable-v24/profile_icon_selector.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/approved_bg.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/cancel_btn_bg.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/date_bg.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/history_tab_selected.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/history_tab_selector.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/history_tab_unselected.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_date_range_24.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_history_selected_icon.xml" value="0.25885416666666666" />
