@@ -59,6 +59,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
+
             if (it.isNotEmpty()) {
 
                 if (it.size > 1) {
@@ -70,12 +71,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     }, 200)
                 }
 
-
                 //display maximum of 5 history
                 val recentFive: MutableList<Leave> = ArrayList()
                 if (it.size > 5) {
                     for (i in 0..4) {
-                        recentFive.add(it[i])
+                        val status = it[i].status
+                        if (status != "Pending") {
+                            recentFive.add(it[i])
+                        }
                     }
                     historyAdapter.setData(recentFive)
                 }else {
