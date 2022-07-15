@@ -2,10 +2,12 @@ package com.victorloveday.leavemanager.ui.fragments
 
 import HistoryAdapter
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,25 +43,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.cancelLeave.setBackgroundResource(R.drawable.cancel_btn_bg)
         binding.editLeave.setBackgroundResource(R.drawable.edit_btn_bg)
         disablePendingLeaveButtons()
+
     }
 
     private fun setupHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
-
-        val leave = Leave(0, "Going for a trip", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Pending")
-        leaveViewModel.saveLeave(leave)
 
         historyAdapter = HistoryAdapter(requireContext())
         adapter = historyAdapter
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, Observer {
+        leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 historyAdapter.setData(it)
+
+                if (it.size > 1) {
+                    val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+                    binding.recentLeavesRecyclerView.startAnimation(slideFromRight)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        (layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, -200)
+                    }, 200)
+                }
+
             } else {
                 Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
             }
 
         })
+
+
 
     }
 
