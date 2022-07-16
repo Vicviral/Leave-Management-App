@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var historyAdapter: HistoryAdapter
 
     var toolbarMenu: Menu? = null
+
+    var bottomNavIcon = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,33 +76,57 @@ class MainActivity : AppCompatActivity() {
 
     private fun setVisibilityStateForToolbarIcons() {
         binding.bottomNavigationView.menu.findItem(R.id.homeFragment)?.setOnMenuItemClickListener {
-            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
-            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
-            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
+            bottomNavIcon = 1
+            hideIconSet1()
 
             return@setOnMenuItemClickListener false
         }
         binding.bottomNavigationView.menu.findItem(R.id.historyFragment)?.setOnMenuItemClickListener {
-            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = true
-            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
-            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
+            bottomNavIcon = 2
+            hideIconSet2()
 
             return@setOnMenuItemClickListener false
         }
         binding.bottomNavigationView.menu.findItem(R.id.notificationFragment)?.setOnMenuItemClickListener {
-            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
-            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = true
-            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
+            bottomNavIcon = 3
+            hideIconSet3()
 
             return@setOnMenuItemClickListener false
         }
         binding.bottomNavigationView.menu.findItem(R.id.profileFragment)?.setOnMenuItemClickListener {
-            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
-            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
-            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
+            bottomNavIcon = 4
+            hideIconSet4()
 
             return@setOnMenuItemClickListener false
         }
+
+    }
+
+    private fun hideIconSet4() {
+        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
+        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
+        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
+
+    }
+
+    private fun hideIconSet3() {
+        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
+        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = true
+        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
+
+    }
+
+    private fun hideIconSet2() {
+        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = true
+        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
+        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
+
+    }
+
+    private fun hideIconSet1() {
+        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
+        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
+        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
 
     }
 
