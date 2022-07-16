@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"/>
 
-    <TextView
-        android:id="@+id/demo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:text="Demo"/>
+<!--    <TextView-->
+<!--        android:id="@+id/demo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="30sp"-->
+<!--        android:text="Demo"/>-->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostFragment"

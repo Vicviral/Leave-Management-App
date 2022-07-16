@@ -14,8 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
-import com.victorloveday.leavemanager.database.model.Leave
-import com.victorloveday.leavemanager.database.model.LeaveResponse
+import com.victorloveday.leavemanager.database.model.HistoryResponse
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
 import retrofit2.HttpException
@@ -29,7 +28,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var historyAdapter: HistoryAdapter
     private lateinit var leaveViewModel: LeaveViewModel
-    private lateinit var response: Response<LeaveResponse>
+    private lateinit var response: Response<HistoryResponse>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,7 +38,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         historyAdapter = HistoryAdapter(requireContext())
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
-//        fetchUserLeaveHistoryFromAPI()
+        fetchUserLeaveHistoryFromAPI()
         setupRecentHistoryRecyclerView()
         displayRecentPendingLeave()
     }
@@ -48,11 +47,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         leaveViewModel.getRecentPendingLeave("Pending").observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 val recentPendingLeave = it[0]
-                binding.leaveTittle.text = "${recentPendingLeave.title}"
-                binding.leaveType.text = "${recentPendingLeave.type}"
-                binding.leaveDescription.text = "${recentPendingLeave.reason}"
-                binding.leaveStatus.text = "${recentPendingLeave.status}"
-                binding.duration.text = "${recentPendingLeave.startDate} - ${recentPendingLeave.endDate}"
+                binding.leaveTittle.text = recentPendingLeave.leave_message
+                binding.leaveType.text = recentPendingLeave.leave_type
+                binding.leaveDescription.text = recentPendingLeave.leave_message
+                binding.leaveStatus.text = recentPendingLeave.status
+                binding.duration.text = "${recentPendingLeave.start_date} - ${recentPendingLeave.end_date}"
 
                 enablePendingLeaveButtons()
             }else {
@@ -89,7 +88,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //make api request
         lifecycleScope.launchWhenCreated {
             response = try {
-                RetrofitInstance.api.getLeaves("userId")
+                RetrofitInstance.api.getLeaves("employeeLeaves", "5")
 
             } catch (e: IOException) {
                 Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
@@ -107,16 +106,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             if (response.isSuccessful && response.body() != null) {
 
-                if (!response.body()!!.error) {
+                if (response.body()!!.status == 1) {
                     //upsert response to data base
-                    saveHistoryToDatabase()
+//                    saveHistoryToDatabase()
+                    Toast.makeText(requireContext(), "${response.body()}", Toast.LENGTH_SHORT).show()
 
                 } else {
-                    Toast.makeText(requireContext(), response.body()!!.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed ${response.body()}", Toast.LENGTH_SHORT).show()
                 }
 
             } else {
-                Toast.makeText(requireContext(), "Response not successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed: ${response.body()?.status}", Toast.LENGTH_SHORT).show()
 
                 return@launchWhenCreated
             }

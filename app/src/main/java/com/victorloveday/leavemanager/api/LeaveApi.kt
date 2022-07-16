@@ -1,14 +1,15 @@
 package com.victorloveday.leavemanager.api
 
-import com.victorloveday.leavemanager.database.model.LeaveResponse
+import com.victorloveday.leavemanager.database.model.HistoryResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface LeaveApi {
 
-    @GET("history")
+    @GET("/leave/route/outgoing.php?")
     suspend fun getLeaves(
-        @Query("userId") userId: String
-    ): Response<LeaveResponse>
+        @Query("employeeLeaves") employeeLeaves: String,
+        @Query("userId") userId: String,
+    ): Response<HistoryResponse>
 }

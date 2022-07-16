@@ -1,5 +1,6 @@
 package com.victorloveday.leavemanager.api
 
+import com.victorloveday.leavemanager.utils.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +16,7 @@ object RetrofitInstance {
 
     val api : LeaveApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://steamledge.com")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

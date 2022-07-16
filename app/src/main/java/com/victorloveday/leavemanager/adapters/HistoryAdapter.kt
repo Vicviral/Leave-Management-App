@@ -49,11 +49,11 @@ class HistoryAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         holder.binding.apply {
             val leave = leaves[position]
-            leaveTittle.text = leave.title
-            leaveType.text = leave.type
-            leaveDescription.text = leave.reason
+            leaveTittle.text = leave.leave_title
+            leaveType.text = leave.leave_type
+            leaveDescription.text = leave.leave_message
             leaveStatus.text = leave.status
-            leaveDuration.text = "${leave.startDate} - ${leave.endDate}"
+            leaveDuration.text = "${leave.start_date} - ${leave.end_date}"
 
             //set status color
             when(leave.status) {
