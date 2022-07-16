@@ -5,139 +5,176 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/leaveLayout"
-            android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/leaveLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:padding="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/leaveTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leave Tittle"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/leaveType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Leave Type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/leaveTittle" />
+
+        <TextView
+            android:id="@+id/leaveStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/declined_bg"
+            android:paddingStart="8dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="5dp"
+            android:text="Status"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@id/leaveType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/leaveTittle" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/dateIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/date_bg"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_date_range_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/leaveType" />
+
+        <TextView
+            android:id="@+id/label1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Leave Duration:"
+            app:layout_constraintBottom_toBottomOf="@id/dateIcon"
+            app:layout_constraintStart_toEndOf="@id/dateIcon"
+            app:layout_constraintTop_toTopOf="@id/dateIcon" />
+
+        <TextView
+            android:id="@+id/leaveDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="29th Jan - 5th Feb"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/label1"
+            app:layout_constraintStart_toEndOf="@id/label1"
+            app:layout_constraintTop_toTopOf="@id/label1" />
+
+        <TextView
+            android:id="@+id/leaveDescription"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:padding="16dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:text="Write a description explaining why you need this leave. Write a description explaining why you need this leave"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateIcon" />
 
-            <TextView
-                android:id="@+id/leaveTittle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Leave Tittle"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/leaveType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Leave Type"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/leaveTittle" />
-
-            <TextView
-                android:id="@+id/leaveStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/declined_bg"
-                android:paddingStart="8dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="5dp"
-                android:text="Status"
-                android:textColor="@color/orange"
-                app:layout_constraintBottom_toBottomOf="@id/leaveType"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/leaveTittle" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/dot"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/share_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/leaveDescription" />
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/dateIcon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/date_bg"
-                android:padding="5dp"
-                android:src="@drawable/ic_baseline_date_range_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/leaveType" />
+        <TextView
+            android:id="@+id/leaveYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="2022"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/dot"
+            app:layout_constraintStart_toEndOf="@id/dot"
+            app:layout_constraintTop_toTopOf="@id/dot" />
 
-            <TextView
-                android:id="@+id/label1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Leave Duration:"
-                app:layout_constraintBottom_toBottomOf="@id/dateIcon"
-                app:layout_constraintStart_toEndOf="@id/dateIcon"
-                app:layout_constraintTop_toTopOf="@id/dateIcon" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/dot2"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/share_bg"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toStartOf="@id/leaveTime"
+            app:layout_constraintTop_toBottomOf="@id/leaveDescription" />
 
-            <TextView
-                android:id="@+id/leaveDuration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="29th Jan - 5th Feb"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/label1"
-                app:layout_constraintStart_toEndOf="@id/label1"
-                app:layout_constraintTop_toTopOf="@id/label1" />
+        <TextView
+            android:id="@+id/leaveTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="10:00 AM"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/dot"
+            app:layout_constraintTop_toTopOf="@id/dot" />
 
-            <TextView
-                android:id="@+id/leaveDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Write a description explaining why you need this leave. Write a description explaining why you need this leave"
-                android:textStyle="italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dateIcon" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/dot"
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/share_bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/leaveDescription" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/deleteLeave"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/shareLeaveDetailsIcon"
+            android:background="@drawable/delete_leave_bg"
+            android:padding="3dp"
+            android:src="@drawable/delete_leave"
+            app:layout_constraintTop_toTopOf="@id/leaveYear"
+            app:layout_constraintBottom_toBottomOf="@id/leaveYear" />
 
-            <TextView
-                android:id="@+id/leaveYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2022"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toTopOf="@id/dot"
-                app:layout_constraintStart_toEndOf="@id/dot"
-                app:layout_constraintBottom_toBottomOf="@id/dot"
-                android:textStyle="bold"
-                android:textSize="12sp" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/shareLeaveDetailsIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:visibility="gone"
+            android:background="@drawable/share_bg"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_share_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/deleteLeave"
+            app:layout_constraintBottom_toBottomOf="@id/deleteLeave"
+            />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/shareLeaveDetailsIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="20dp"
-                android:elevation="50dp"
-                android:background="@drawable/share_bg"
-                android:padding="5dp"
-                android:src="@drawable/ic_baseline_share_24"
-                app:layout_constraintTop_toBottomOf="@id/leaveDescription"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="#4F000000"
-        app:layout_constraintTop_toBottomOf="@id/leaveLayout"/>
-
+        app:layout_constraintTop_toBottomOf="@id/leaveLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

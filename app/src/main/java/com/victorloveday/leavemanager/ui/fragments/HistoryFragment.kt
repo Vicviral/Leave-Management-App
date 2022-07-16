@@ -4,15 +4,15 @@ import HistoryAdapter
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.databinding.FragmentHistoryBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class HistoryFragment : Fragment(R.layout.fragment_history) {
 
@@ -28,7 +28,39 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
         setupHistoryRecyclerView()
+        deleteItemFromRecyclerView()
         switchTabs()
+    }
+
+    private fun deleteItemFromRecyclerView() {
+
+        historyAdapter.setOnLeaveClickListener { leave ->
+            historyAdapter.onDeleteItem {
+
+                if (it == true) {
+                    val dialog = BottomSheetDialog(requireContext())
+                    val view = layoutInflater.inflate(R.layout.delete_leave_bottom_sheet, null)
+                    dialog.setCancelable(false)
+                    dialog.setContentView(view)
+                    dialog.show()
+
+                    view.findViewById<LinearLayout>(R.id.deleteLeaveBS).setOnClickListener {
+                        leaveViewModel.deleteLeave(leave)
+                        dialog.dismiss()
+
+                    }
+                    view.findViewById<LinearLayout>(R.id.cancelLeaveBS).setOnClickListener {
+                        dialog.dismiss()
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
     }
 
     private fun setupHistoryRecyclerView() = binding.historyRecyclerView.apply {

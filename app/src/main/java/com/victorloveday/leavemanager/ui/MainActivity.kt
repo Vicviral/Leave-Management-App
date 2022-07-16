@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
             toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
             toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
-            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
 
             return@setOnMenuItemClickListener false
         }
@@ -84,7 +83,6 @@ class MainActivity : AppCompatActivity() {
             toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = true
             toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
             toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
-            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
 
             return@setOnMenuItemClickListener false
         }
@@ -92,7 +90,6 @@ class MainActivity : AppCompatActivity() {
             toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
             toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = true
             toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
-            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
 
             return@setOnMenuItemClickListener false
         }
@@ -100,7 +97,6 @@ class MainActivity : AppCompatActivity() {
             toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
             toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
             toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
-            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
 
             return@setOnMenuItemClickListener false
         }
@@ -112,11 +108,6 @@ class MainActivity : AppCompatActivity() {
         toolbarMenu = menu
         return true
     }
-
-//    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-//
-//        return super.onPrepareOptionsMenu(menu)
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

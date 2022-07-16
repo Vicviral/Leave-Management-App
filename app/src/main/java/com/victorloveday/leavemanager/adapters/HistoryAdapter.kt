@@ -1,10 +1,16 @@
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.ItemHistoryBinding
@@ -67,11 +73,32 @@ class HistoryAdapter(private val context: Context) :
 
             holder.itemView.apply {
                 setOnLongClickListener {
+                    onLeaveLongClickListener?.let {it(leave)}
+                    deleteLeave.visibility = View.VISIBLE
+                    shareLeaveDetailsIcon.visibility = View.VISIBLE
+
+                    leaveTime.visibility = View.INVISIBLE
+                    dot2.visibility = View.INVISIBLE
+
                     true
+                }
+
+                setOnClickListener {
+                    if (deleteLeave.isVisible == true) {
+                        deleteLeave.isVisible = false
+                        shareLeaveDetailsIcon.isVisible = false
+
+                        leaveTime.isVisible = true
+                        dot2.isVisible = true
+                    }
                 }
 
                 shareLeaveDetailsIcon.setOnClickListener {
                     onLeaveClickListener?.let {it(leave)}
+                }
+                deleteLeave.setOnClickListener {
+                    onLeaveClickListener?.let {it(leave)}
+                    deleteItem?.let { it(true) }
                 }
 
             }
@@ -85,8 +112,15 @@ class HistoryAdapter(private val context: Context) :
     }
 
     private var onLeaveClickListener: ((Leave) -> Unit)? = null
+    private var onLeaveLongClickListener: ((Leave) -> Unit)? = null
+    private var deleteItem: ((Boolean) -> Unit)? = null
 
     fun setOnLeaveClickListener(listener : (Leave) -> Unit) {
         onLeaveClickListener = listener
+        onLeaveLongClickListener = listener
+    }
+
+    fun onDeleteItem(bool : (Boolean) -> Unit) {
+        deleteItem = bool
     }
 }
