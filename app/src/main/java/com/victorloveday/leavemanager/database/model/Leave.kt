@@ -8,8 +8,8 @@ import java.io.Serializable
 data class Leave(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val approved_date: String,
-    val declined_date: String,
+    val approved_date: String? = null,
+    val declined_date: String? = null,
     val end_date: String,
     val leave_message: String,
     val leave_title: String,

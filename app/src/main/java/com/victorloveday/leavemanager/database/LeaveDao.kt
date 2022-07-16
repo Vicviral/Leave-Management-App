@@ -8,7 +8,7 @@ import com.victorloveday.leavemanager.database.model.Leave
 interface LeaveDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveLeave(leave: Leave): Long
+    suspend fun saveLeave(leave: List<Leave>)
 
     @Delete
     suspend fun deleteLeave(leave: Leave)

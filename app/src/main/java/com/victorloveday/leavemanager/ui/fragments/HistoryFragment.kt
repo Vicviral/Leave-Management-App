@@ -100,13 +100,13 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
                     })
                 }
                 R.id.tab2 -> {
-                    leaveViewModel.getLeaveHistoryByLeaveType("Casual Leave").observe(viewLifecycleOwner, {
+                    leaveViewModel.getLeaveHistoryByLeaveType("Casual").observe(viewLifecycleOwner, {
                         binding.historyRecyclerView.startAnimation(slideFromBottom)
                         historyAdapter.setData(it)
                     })
                 }
                 R.id.tab3 -> {
-                    leaveViewModel.getLeaveHistoryByLeaveType("Sick Leave").observe(viewLifecycleOwner, {
+                    leaveViewModel.getLeaveHistoryByLeaveType("Sick").observe(viewLifecycleOwner, {
                         binding.historyRecyclerView.startAnimation(slideFromBottom)
                         historyAdapter.setData(it)
                     })

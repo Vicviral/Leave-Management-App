@@ -28,7 +28,7 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         readRecentFiveLeaves = leaveRepository.readRecentFiveLeaves
     }
 
-    fun saveLeave(leave: Leave) {
+    fun saveLeave(leave: List<Leave>) {
         viewModelScope.launch(Dispatchers.IO) {
             leaveRepository.saveLeave(leave)
         }

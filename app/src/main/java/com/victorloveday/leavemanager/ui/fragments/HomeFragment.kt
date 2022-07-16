@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
 import com.victorloveday.leavemanager.database.model.HistoryResponse
+import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
 import retrofit2.HttpException
@@ -108,7 +109,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 if (response.body()!!.status == 1) {
                     //upsert response to data base
-//                    saveHistoryToDatabase()
+                    val result = response.body()!!.info
+                    saveHistoryToDatabase(result)
                     Toast.makeText(requireContext(), "${response.body()}", Toast.LENGTH_SHORT).show()
 
                 } else {
@@ -124,8 +126,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun saveHistoryToDatabase() {
-        leaveViewModel.readAllLeaveHistory
+    private fun saveHistoryToDatabase(leave: List<Leave>) {
+        leaveViewModel.saveLeave(leave)
     }
 
     private fun disablePendingLeaveButtons() {
