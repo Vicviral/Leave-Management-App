@@ -17,8 +17,6 @@ import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.LeaveResponse
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -54,7 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setupRecentHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
 
         //for demo purpose
-//        val leave = Leave(0, "Going to the beach", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Declined")
+        val leave = Leave(0, "Going to the moon", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Pending")
 //        leaveViewModel.saveLeave(leave)
 
         adapter = historyAdapter
@@ -76,10 +74,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 val recentFive: MutableList<Leave> = ArrayList()
                 if (it.size > 5) {
                     for (i in 0..4) {
-                        val status = it[i].status
-                        if (status != "Pending") {
-                            recentFive.add(it[i])
-                        }
+                        recentFive.add(it[i])
                     }
                     historyAdapter.setData(recentFive)
                 }else {
