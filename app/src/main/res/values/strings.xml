@@ -9,4 +9,7 @@
     <string name="sick">Sick</string>
     <string name="casual">Casual</string>
     <string name="all">All</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="settings">Settings</string>
 </resources>

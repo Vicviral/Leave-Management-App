@@ -1,10 +1,13 @@
 package com.victorloveday.leavemanager.ui
 
+import HistoryAdapter
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -19,11 +22,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
+    private lateinit var historyAdapter: HistoryAdapter
+
+    var toolbarMenu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        historyAdapter = HistoryAdapter(this)
 
         //setup nav host
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
@@ -44,6 +52,9 @@ class MainActivity : AppCompatActivity() {
             return@setOnItemReselectedListener
         }
 
+        //set visibility of toolbar icons
+        setVisibilityStateForToolbarIcons()
+
         //feeds icon badge badge
         val badge = binding.bottomNavigationView.getOrCreateBadge(R.id.homeFragment)
         badge.isVisible = true
@@ -57,6 +68,59 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LeaveApplicationActivity::class.java))
             overridePendingTransition(R.anim.slide_in_bottom,  R.anim.slide_out_top)
         }
+
+    }
+
+    private fun setVisibilityStateForToolbarIcons() {
+        binding.bottomNavigationView.menu.findItem(R.id.homeFragment)?.setOnMenuItemClickListener {
+            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
+            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
+            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
+            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
+
+            return@setOnMenuItemClickListener false
+        }
+        binding.bottomNavigationView.menu.findItem(R.id.historyFragment)?.setOnMenuItemClickListener {
+            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = true
+            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
+            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
+            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
+
+            return@setOnMenuItemClickListener false
+        }
+        binding.bottomNavigationView.menu.findItem(R.id.notificationFragment)?.setOnMenuItemClickListener {
+            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
+            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = true
+            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
+            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
+
+            return@setOnMenuItemClickListener false
+        }
+        binding.bottomNavigationView.menu.findItem(R.id.profileFragment)?.setOnMenuItemClickListener {
+            toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
+            toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
+            toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
+            toolbarMenu?.findItem(R.id.deleteLeave)?.isVisible = false
+
+            return@setOnMenuItemClickListener false
+        }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_menu, menu)
+        toolbarMenu = menu
+        return true
+    }
+
+//    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+//
+//        return super.onPrepareOptionsMenu(menu)
+//    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.databinding.FragmentHistoryBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HistoryFragment : Fragment(R.layout.fragment_history) {
 
@@ -22,6 +24,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHistoryBinding.bind(view)
 
+        historyAdapter = HistoryAdapter(requireContext())
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
         setupHistoryRecyclerView()
@@ -30,7 +33,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
 
     private fun setupHistoryRecyclerView() = binding.historyRecyclerView.apply {
 
-        historyAdapter = HistoryAdapter(requireContext())
         adapter = historyAdapter
         layoutManager = LinearLayoutManager(requireContext())
 
@@ -80,5 +82,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         }
 
     }
+
 
 }

@@ -17,6 +17,8 @@ import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.LeaveResponse
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -30,10 +32,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var leaveViewModel: LeaveViewModel
     private lateinit var response: Response<LeaveResponse>
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
+        historyAdapter = HistoryAdapter(requireContext())
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
 //        fetchUserLeaveHistoryFromAPI()
@@ -53,8 +57,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 //        val leave = Leave(0, "Going to the beach", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Declined")
 //        leaveViewModel.saveLeave(leave)
 
-
-        historyAdapter = HistoryAdapter(requireContext())
         adapter = historyAdapter
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
