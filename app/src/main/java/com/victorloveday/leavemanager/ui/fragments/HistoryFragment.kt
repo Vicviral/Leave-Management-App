@@ -67,6 +67,8 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
 
         adapter = historyAdapter
         layoutManager = LinearLayoutManager(requireContext())
+        setPadding(0, 0, 0, 100)
+
 
         leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
 

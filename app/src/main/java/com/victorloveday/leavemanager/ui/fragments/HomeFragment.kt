@@ -52,7 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setupRecentHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
 
         //for demo purpose
-        val leave = Leave(0, "Going to the moon", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Pending")
+//        val leave = Leave(0, "Going to the moon", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Pending")
 //        leaveViewModel.saveLeave(leave)
 
         adapter = historyAdapter
