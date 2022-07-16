@@ -20,6 +20,9 @@ interface LeaveDao {
     fun getLeaveHistoryByLeaveType(leaveType: String): LiveData<List<Leave>>
 
     @Query("SELECT * FROM leaves_table ORDER BY id DESC LIMIT 5")
-    fun getLastFiveLeaves(): LiveData<List<Leave>>
+    fun getRecentFiveLeaves(): LiveData<List<Leave>>
+
+    @Query("SELECT * FROM leaves_table WHERE `status` = :status ORDER BY id DESC LIMIT 1")
+    fun getRecentPendingLeave(status: String): LiveData<List<Leave>>
 
 }

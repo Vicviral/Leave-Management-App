@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class LeaveViewModel(application: Application) : AndroidViewModel(application) {
     val readAllLeaveHistory: LiveData<List<Leave>>
-    val readLastFiveLeaves: LiveData<List<Leave>>
+    val readRecentFiveLeaves: LiveData<List<Leave>>
     private val leaveRepository: LeaveRepository
 
 
@@ -25,7 +25,7 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         val leaveDao = UserDatabase.getDatabase(application).leaveDao()
         leaveRepository = LeaveRepository(leaveDao)
         readAllLeaveHistory = leaveRepository.readAllLeaveHistory
-        readLastFiveLeaves = leaveRepository.readLastFiveLeaves
+        readRecentFiveLeaves = leaveRepository.readRecentFiveLeaves
     }
 
     fun saveLeave(leave: Leave) {
@@ -42,6 +42,10 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getLeaveHistoryByLeaveType(leaveType: String): LiveData<List<Leave>> {
         return leaveRepository.getLeaveHistoryByLeaveType(leaveType)
+    }
+
+    fun getRecentPendingLeave(status: String): LiveData<List<Leave>> {
+        return leaveRepository.getRecentPendingLeave(status)
     }
 
 

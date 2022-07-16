@@ -2,10 +2,7 @@ package com.victorloveday.leavemanager.ui.fragments
 
 import HistoryAdapter
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
-import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.LeaveResponse
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
@@ -39,14 +35,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
 //        fetchUserLeaveHistoryFromAPI()
-
         setupRecentHistoryRecyclerView()
+        displayRecentPendingLeave()
 
         //set backgrounds for colors
         binding.cancelLeave.setBackgroundResource(R.drawable.cancel_btn_bg)
         binding.editLeave.setBackgroundResource(R.drawable.edit_btn_bg)
         disablePendingLeaveButtons()
 
+    }
+
+    private fun displayRecentPendingLeave() {
+        leaveViewModel.getRecentPendingLeave("Pending").observe(viewLifecycleOwner, {
+            val recentPendingLeave = it[0]
+            binding.leaveTittle.text = "${recentPendingLeave.title}"
+            binding.leaveType.text = "${recentPendingLeave.type}"
+            binding.leaveDescription.text = "${recentPendingLeave.reason}"
+            binding.leaveStatus.text = "${recentPendingLeave.status}"
+            binding.duration.text = "${recentPendingLeave.startDate} - ${recentPendingLeave.endDate}"
+        })
     }
 
     private fun setupRecentHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
@@ -58,7 +65,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         adapter = historyAdapter
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        leaveViewModel.readLastFiveLeaves.observe(viewLifecycleOwner, {
+        leaveViewModel.readRecentFiveLeaves.observe(viewLifecycleOwner, {
             historyAdapter.setData(it)
         })
 
