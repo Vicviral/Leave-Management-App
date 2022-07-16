@@ -271,28 +271,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:padding="5dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:weightSum="2"
                     app:layout_constraintTop_toBottomOf="@id/leaveDescription">
 
-                    <Button
+                    <LinearLayout
                         android:id="@+id/cancelLeave"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:background="@drawable/cancel_btn_bg"
                         android:text="Cancel"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false" >
 
-                    <Button
+                        <TextView
+                            android:id="@+id/cancel_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cancel"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/editLeave"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:background="@drawable/edit_btn_bg"
                         android:text="Edit"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false" >
+
+                        <TextView
+                            android:id="@+id/edit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:text="Edit"/>
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 

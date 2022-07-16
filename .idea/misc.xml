@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable/delete_button.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/delete_leave.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/delete_leave_bg.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/disabled_button.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/history_tab_selected.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/history_tab_selector.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/history_tab_unselected.xml" value="0.25885416666666666" />

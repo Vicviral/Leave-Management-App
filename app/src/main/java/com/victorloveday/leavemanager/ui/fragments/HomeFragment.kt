@@ -1,8 +1,12 @@
 package com.victorloveday.leavemanager.ui.fragments
 
 import HistoryAdapter
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
+import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.LeaveResponse
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
@@ -37,29 +42,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 //        fetchUserLeaveHistoryFromAPI()
         setupRecentHistoryRecyclerView()
         displayRecentPendingLeave()
-
-        //set backgrounds for colors
-        binding.cancelLeave.setBackgroundResource(R.drawable.cancel_btn_bg)
-        binding.editLeave.setBackgroundResource(R.drawable.edit_btn_bg)
-        disablePendingLeaveButtons()
-
     }
 
-    private fun displayRecentPendingLeave() {
+    private fun displayRecentPendingLeave() = binding.recentLeavesRecyclerView.apply {
         leaveViewModel.getRecentPendingLeave("Pending").observe(viewLifecycleOwner, {
-            val recentPendingLeave = it[0]
-            binding.leaveTittle.text = "${recentPendingLeave.title}"
-            binding.leaveType.text = "${recentPendingLeave.type}"
-            binding.leaveDescription.text = "${recentPendingLeave.reason}"
-            binding.leaveStatus.text = "${recentPendingLeave.status}"
-            binding.duration.text = "${recentPendingLeave.startDate} - ${recentPendingLeave.endDate}"
+            if (it.isNotEmpty()) {
+                val recentPendingLeave = it[0]
+                binding.leaveTittle.text = "${recentPendingLeave.title}"
+                binding.leaveType.text = "${recentPendingLeave.type}"
+                binding.leaveDescription.text = "${recentPendingLeave.reason}"
+                binding.leaveStatus.text = "${recentPendingLeave.status}"
+                binding.duration.text = "${recentPendingLeave.startDate} - ${recentPendingLeave.endDate}"
+
+                enablePendingLeaveButtons()
+            }else {
+                disablePendingLeaveButtons()
+            }
+
         })
     }
 
     private fun setupRecentHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
-
         //for demo purpose
-//        val leave = Leave(0, "Going on a trip", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Approved")
+//        val leave = Leave(0, "Going to the moon", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Pending")
 //        leaveViewModel.saveLeave(leave)
 
         adapter = historyAdapter
@@ -67,6 +72,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         leaveViewModel.readRecentFiveLeaves.observe(viewLifecycleOwner, {
             historyAdapter.setData(it)
+
+            //animate recycler view position
+            if (it.size > 1) {
+                val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+                binding.recentLeavesRecyclerView.startAnimation(slideFromRight)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    (layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, -200)
+                }, 200)
+            }
         })
 
     }
@@ -117,6 +131,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun disablePendingLeaveButtons() {
         binding.editLeave.isEnabled = false
         binding.cancelLeave.isEnabled = false
+
+        binding.editLeave.setBackgroundResource(R.drawable.disabled_button)
+        binding.cancelLeave.setBackgroundResource(R.drawable.disabled_button)
+
+        binding.cancelText.setTextColor(Color.WHITE)
+        binding.editText.setTextColor(Color.WHITE)
     }
     private fun enablePendingLeaveButtons() {
         binding.editLeave.isEnabled = true
