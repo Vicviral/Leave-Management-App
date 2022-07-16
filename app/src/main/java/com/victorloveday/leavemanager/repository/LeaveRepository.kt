@@ -9,6 +9,7 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
 
     //return every item on the leave table
     val readAllLeaveHistory: LiveData<List<Leave>> = leaveDao.getAllLeaveHistory()
+    val readLastFiveLeaves: LiveData<List<Leave>> = leaveDao.getLastFiveLeaves()
 
     suspend fun saveLeave(leave: Leave) {
         leaveDao.saveLeave(leave)

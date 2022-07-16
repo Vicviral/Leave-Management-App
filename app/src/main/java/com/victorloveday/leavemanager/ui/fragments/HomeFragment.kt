@@ -52,42 +52,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setupRecentHistoryRecyclerView() = binding.recentLeavesRecyclerView.apply {
 
         //for demo purpose
-//        val leave = Leave(0, "Going to the moon", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Pending")
+//        val leave = Leave(0, "Going on a trip", "Casual Leave", "I'll need to travel for an emergency trip due to my father's coronation in Ibadan", "28 July", "2 August", "Approved")
 //        leaveViewModel.saveLeave(leave)
 
         adapter = historyAdapter
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
-
-            if (it.isNotEmpty()) {
-
-                if (it.size > 1) {
-                    val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
-                    binding.recentLeavesRecyclerView.startAnimation(slideFromRight)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        (layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, -200)
-                    }, 200)
-                }
-
-                //display maximum of 5 history
-                val recentFive: MutableList<Leave> = ArrayList()
-                if (it.size > 5) {
-                    for (i in 0..4) {
-                        recentFive.add(it[i])
-                    }
-                    historyAdapter.setData(recentFive)
-                }else {
-                    historyAdapter.setData(it)
-                }
-
-            } else {
-                Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
-            }
-
+        leaveViewModel.readLastFiveLeaves.observe(viewLifecycleOwner, {
+            historyAdapter.setData(it)
         })
-
-
 
     }
 
