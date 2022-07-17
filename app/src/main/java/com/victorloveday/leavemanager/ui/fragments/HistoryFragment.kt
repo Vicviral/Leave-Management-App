@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
 import com.victorloveday.leavemanager.database.model.HistoryResponse
+import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.LeaveApplicationResponse
 import com.victorloveday.leavemanager.databinding.FragmentHistoryBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
@@ -28,6 +29,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
     private lateinit var historyAdapter: HistoryAdapter
     private lateinit var leaveViewModel: LeaveViewModel
     private lateinit var response: Response<LeaveApplicationResponse>
+    private lateinit var historyResponse: Response<HistoryResponse>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,7 +78,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
     private fun deleteRowFromRemoteDatabase(leaveId: String, dialog: BottomSheetDialog) {
         lifecycleScope.launchWhenCreated {
             response = try {
-                RetrofitInstance.api.deleteLeave(leaveId)
+                RetrofitInstance.api.deleteLeave("leave_application_deletion", leaveId)
 
             } catch (e: IOException) {
                 Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
@@ -96,8 +98,12 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
 
                 if (response.body()!!.status == 1) {
                     //leave has been successfully removed
-                    //upsert update response to local data base
-                    HomeFragment().fetchUserLeaveHistoryFromAPI()
+                        //clear old items in local database
+                    leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
+                        leaveViewModel.deleteLeave(it)
+                    })
+                    //upsert updated response to local data base
+                    etchUserLeaveHistoryFromAPI()
                     dialog.dismiss()
 
                 } else {
@@ -111,6 +117,52 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             }
 
         }
+
+    }
+
+    private fun etchUserLeaveHistoryFromAPI() {
+        lifecycleScope.launchWhenCreated {
+            historyResponse = try {
+                RetrofitInstance.api.getLeaves("employeeLeaves", "5")
+
+            } catch (e: IOException) {
+                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            } catch (e: SocketTimeoutException) {
+                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            }
+
+            if (historyResponse.isSuccessful && historyResponse.body() != null) {
+
+                if (historyResponse.body()!!.status == 1) {
+                    //upsert response to local data base
+                    val result = historyResponse.body()!!.info
+                    saveHistoryToDatabase(result)
+
+                } else {
+                    Toast.makeText(requireContext(), "Failed ${response.body()}", Toast.LENGTH_SHORT).show()
+                }
+
+            } else {
+                Toast.makeText(requireContext(), "Failed: ${response.body()?.status}", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            }
+
+        }
+
+    }
+
+    private fun saveHistoryToDatabase(leave: List<Leave>) {
+        leaveViewModel.saveLeave(leave)
+        Toast.makeText(requireContext(), "Successfully saved.", Toast.LENGTH_SHORT).show()
 
     }
 
