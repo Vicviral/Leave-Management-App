@@ -36,6 +36,11 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHistoryBinding.bind(view)
 
+        //entry animation
+        val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+        binding.historyRecyclerView.startAnimation(slideFromRight)
+
+
         historyAdapter = HistoryAdapter(requireContext())
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
@@ -59,7 +64,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
                     view.findViewById<LinearLayout>(R.id.deleteLeaveBS).setOnClickListener {
                         //this function only hides the deleted leave from the user's interface
                         //all data remains persistent on the remote database
-                        deleteRowFromRemoteDatabase(leave.id.toString(), dialog)
+                        deleteRowFromRemoteDatabase(leave, dialog)
                     }
                     view.findViewById<LinearLayout>(R.id.cancelLeaveBS).setOnClickListener {
                         dialog.dismiss()
@@ -75,10 +80,10 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
 
     }
 
-    private fun deleteRowFromRemoteDatabase(leaveId: String, dialog: BottomSheetDialog) {
+    private fun deleteRowFromRemoteDatabase(leave: Leave, dialog: BottomSheetDialog) {
         lifecycleScope.launchWhenCreated {
             response = try {
-                RetrofitInstance.api.deleteLeave("leave_application_deletion", leaveId)
+                RetrofitInstance.api.deleteLeave("leave_application_deletion", "${leave.id}")
 
             } catch (e: IOException) {
                 Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
@@ -97,14 +102,11 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             if (response.isSuccessful && response.body() != null) {
 
                 if (response.body()!!.status == 1) {
-                    //leave has been successfully removed
-                        //clear old items in local database
-                    leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
-                        leaveViewModel.deleteLeave(it)
-                    })
-                    //upsert updated response to local data base
-                    etchUserLeaveHistoryFromAPI()
+                    //leave has been successfully removed from remote server
+                    //remove leave from local db
+                    leaveViewModel.deleteLeave(leave)
                     dialog.dismiss()
+                    Toast.makeText(requireContext(), "Successfully Deleted", Toast.LENGTH_SHORT).show()
 
                 } else {
                     Toast.makeText(requireContext(), "Failed ${response.body()}", Toast.LENGTH_SHORT).show()
@@ -117,52 +119,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             }
 
         }
-
-    }
-
-    private fun etchUserLeaveHistoryFromAPI() {
-        lifecycleScope.launchWhenCreated {
-            historyResponse = try {
-                RetrofitInstance.api.getLeaves("employeeLeaves", "5")
-
-            } catch (e: IOException) {
-                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
-
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
-
-                return@launchWhenCreated
-            } catch (e: SocketTimeoutException) {
-                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
-
-                return@launchWhenCreated
-            }
-
-            if (historyResponse.isSuccessful && historyResponse.body() != null) {
-
-                if (historyResponse.body()!!.status == 1) {
-                    //upsert response to local data base
-                    val result = historyResponse.body()!!.info
-                    saveHistoryToDatabase(result)
-
-                } else {
-                    Toast.makeText(requireContext(), "Failed ${response.body()}", Toast.LENGTH_SHORT).show()
-                }
-
-            } else {
-                Toast.makeText(requireContext(), "Failed: ${response.body()?.status}", Toast.LENGTH_SHORT).show()
-
-                return@launchWhenCreated
-            }
-
-        }
-
-    }
-
-    private fun saveHistoryToDatabase(leave: List<Leave>) {
-        leaveViewModel.saveLeave(leave)
-        Toast.makeText(requireContext(), "Successfully saved.", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -172,13 +128,9 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         layoutManager = LinearLayoutManager(requireContext())
         setPadding(0, 0, 0, 100)
 
-
         leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
 
             if (it.isNotEmpty()) {
-                val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
-                binding.historyRecyclerView.startAnimation(slideFromRight)
-
                 historyAdapter.setData(it)
 
             } else {

@@ -14,7 +14,7 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
         leaveDao.saveLeave(leave)
     }
 
-    suspend fun deleteLeave(leave: List<Leave>) {
+    suspend fun deleteLeave(leave: Leave) {
         leaveDao.deleteLeave(leave)
     }
 

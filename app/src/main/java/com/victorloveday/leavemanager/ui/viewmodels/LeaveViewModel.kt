@@ -34,7 +34,7 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteLeave(leave: List<Leave>) {
+    fun deleteLeave(leave: Leave) {
         viewModelScope.launch(Dispatchers.IO) {
             leaveRepository.deleteLeave(leave)
         }

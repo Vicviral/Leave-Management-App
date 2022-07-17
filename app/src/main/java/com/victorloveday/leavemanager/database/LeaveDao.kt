@@ -11,7 +11,7 @@ interface LeaveDao {
     suspend fun saveLeave(leave: List<Leave>)
 
     @Delete
-    suspend fun deleteLeave(leave: List<Leave>)
+    suspend fun deleteLeave(leave: Leave)
 
     @Query("SELECT * FROM leaves_table ORDER BY id DESC")
     fun getAllLeaveHistory(): LiveData<List<Leave>>
