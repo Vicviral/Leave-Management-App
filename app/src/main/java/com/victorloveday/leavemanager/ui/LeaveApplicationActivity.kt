@@ -26,6 +26,7 @@ class LeaveApplicationActivity : AppCompatActivity() {
     private var leaveDescription = ""
     private var startDate = ""
     private var endDate = ""
+    private var leaveDuration = ""
     private lateinit var response: Response<LeaveApplicationResponse>
 
 
@@ -65,16 +66,19 @@ class LeaveApplicationActivity : AppCompatActivity() {
 
             // Setting up the event for when ok is clicked
             datePicker.addOnPositiveButtonClickListener {
+                //start date
                 val st = datePicker.selection?.first
                 val formatSt = outputDateFormat.format(st)
                 startDate = formatSt
 
+                //end date
                 val en = datePicker.selection?.second
                 val formatEn =  outputDateFormat.format(en)
                 endDate = formatEn
 
-                binding.startDate.text = startDate
-                binding.endDate.text = endDate
+                //leave duration
+                leaveDuration = datePicker.headerText
+                binding.leaveDuration.text = leaveDuration
             }
 
             // Setting up the event for when cancelled is clicked
@@ -99,7 +103,7 @@ class LeaveApplicationActivity : AppCompatActivity() {
         leaveDescription = binding.leaveDescription.text.toString()
 
 
-        if (leaveType.isNullOrEmpty() || leaveTitle.isNullOrEmpty() || leaveDescription.isNullOrEmpty() || startDate.isNullOrEmpty() || endDate.isNullOrEmpty()) {
+        if (leaveType.isNullOrEmpty() || leaveTitle.isNullOrEmpty() || leaveDescription.isNullOrEmpty() || startDate.isNullOrEmpty() || endDate.isNullOrEmpty() || leaveDuration.isNullOrEmpty()) {
             Toast.makeText(this@LeaveApplicationActivity, "Please fill all fields", Toast.LENGTH_SHORT).show()
         } else {
             submitLeaveApplication()
@@ -113,11 +117,12 @@ class LeaveApplicationActivity : AppCompatActivity() {
                 RetrofitInstance.api.submitLeaveApplication(
                     "",
                     "5",
-                    "$leaveType",
-                    "$leaveDescription",
-                    "$startDate",
-                    "$endDate",
-                    "$leaveTitle"
+                    leaveType,
+                    leaveDescription,
+                    startDate,
+                    endDate,
+                    leaveTitle,
+                    leaveDuration
                 )
 
             } catch (e: IOException) {

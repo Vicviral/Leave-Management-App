@@ -53,7 +53,7 @@ class HistoryAdapter(private val context: Context) :
             leaveType.text = leave.leave_type
             leaveDescription.text = leave.leave_message
             leaveStatus.text = leave.status
-            leaveDuration.text = "${leave.start_date} - ${leave.end_date}"
+            leaveDuration.text = leave.leave_duration
 
             //set status color
             when(leave.status) {

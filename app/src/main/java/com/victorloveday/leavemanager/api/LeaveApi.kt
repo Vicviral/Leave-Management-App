@@ -22,6 +22,7 @@ interface LeaveApi {
         @Query("leave_message") leave_message: String,
         @Query("start_date") start_date: String,
         @Query("end_date") end_date: String,
-        @Query("leave_title") leave_title: String
+        @Query("leave_title") leave_title: String,
+        @Query("leave_duration") leave_duration: String
     ): Response<LeaveApplicationResponse>
 }

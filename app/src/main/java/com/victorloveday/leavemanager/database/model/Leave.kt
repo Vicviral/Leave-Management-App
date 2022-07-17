@@ -18,5 +18,6 @@ data class Leave(
     val start_date: String,
     val status: String,
     val timeIn: String,
-    val user_id: String
+    val user_id: String,
+    val leave_duration: String
 )

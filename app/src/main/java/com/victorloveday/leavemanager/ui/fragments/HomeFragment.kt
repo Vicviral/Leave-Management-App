@@ -52,7 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 binding.leaveType.text = recentPendingLeave.leave_type
                 binding.leaveDescription.text = recentPendingLeave.leave_message
                 binding.leaveStatus.text = recentPendingLeave.status
-                binding.duration.text = "${recentPendingLeave.start_date} - ${recentPendingLeave.end_date}"
+                binding.duration.text = recentPendingLeave.leave_duration
 
                 enablePendingLeaveButtons()
             }else {
