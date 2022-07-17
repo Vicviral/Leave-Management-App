@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/delete_leave.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/delete_leave_bg.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/disabled_button.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/edit_text_bg.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/history_tab_selected.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/history_tab_selector.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/history_tab_unselected.xml" value="0.25885416666666666" />
@@ -35,8 +36,9 @@
         <entry key="app/src/main/res/drawable/ic_profile_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_profile_unselected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/pending_bg.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/secondary_icon_bg.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/share_bg.xml" value="0.25885416666666666" />
-        <entry key="app/src/main/res/layout/activity_leave_application.xml" value="0.22864583333333333" />
+        <entry key="app/src/main/res/layout/activity_leave_application.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/delete_leave_bottom_sheet.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_application.xml" value="0.24270833333333333" />
@@ -48,6 +50,7 @@
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/menu/history_menu.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/menu/home_menu.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/menu/leave_menu.xml" value="0.24270833333333333" />
       </map>
     </option>
   </component>

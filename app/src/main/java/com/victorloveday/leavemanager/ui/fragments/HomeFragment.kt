@@ -48,7 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         leaveViewModel.getRecentPendingLeave("Pending").observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 val recentPendingLeave = it[0]
-                binding.leaveTittle.text = recentPendingLeave.leave_message
+                binding.leaveTittle.text = recentPendingLeave.leave_title
                 binding.leaveType.text = recentPendingLeave.leave_type
                 binding.leaveDescription.text = recentPendingLeave.leave_message
                 binding.leaveStatus.text = recentPendingLeave.status
@@ -111,7 +111,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     //upsert response to data base
                     val result = response.body()!!.info
                     saveHistoryToDatabase(result)
-                    Toast.makeText(requireContext(), "${response.body()}", Toast.LENGTH_SHORT).show()
 
                 } else {
                     Toast.makeText(requireContext(), "Failed ${response.body()}", Toast.LENGTH_SHORT).show()

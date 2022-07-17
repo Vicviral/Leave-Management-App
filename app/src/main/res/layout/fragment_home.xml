@@ -285,7 +285,6 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:background="@drawable/cancel_btn_bg"
-                        android:text="Cancel"
                         android:textAllCaps="false" >
 
                         <TextView
@@ -303,7 +302,6 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:background="@drawable/edit_btn_bg"
-                        android:text="Edit"
                         android:textAllCaps="false" >
 
                         <TextView
