@@ -25,4 +25,7 @@ interface LeaveDao {
     @Query("SELECT * FROM leaves_table WHERE `status` = :status ORDER BY id DESC LIMIT 1")
     fun getRecentPendingLeave(status: String): LiveData<List<Leave>>
 
+    @Query("SELECT * FROM leaves_table WHERE leave_type = :leaveType AND status = :status ")
+    fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>>
+
 }

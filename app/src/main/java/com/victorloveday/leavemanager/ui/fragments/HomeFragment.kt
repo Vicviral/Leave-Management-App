@@ -12,12 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
 import com.victorloveday.leavemanager.database.model.HistoryResponse
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
+import com.victorloveday.leavemanager.utils.Constants.Companion.GIVEN_ANNUAL_LEAVE
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -39,9 +41,54 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         historyAdapter = HistoryAdapter(requireContext())
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
+        displayUserMetrics()
         fetchUserLeaveHistoryFromAPI()
         setupRecentHistoryRecyclerView()
         displayRecentPendingLeave()
+    }
+
+    private fun displayUserMetrics() {
+
+        leaveViewModel.getLeavesByStatusAndType("Casual", "Approved").observe(viewLifecycleOwner, {
+            var prefix = "days"
+            if (it.size <= 1) prefix = "day"
+            binding.days1.text = "${it.size} $prefix"
+
+            val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat() * it.size
+
+            val casualLeaveProgressBar = binding.casualLeaveProgressBar
+            casualLeaveProgressBar.apply {
+                progress = progressBarValue
+            }
+
+        })
+        leaveViewModel.getLeavesByStatusAndType("Sick", "Approved").observe(viewLifecycleOwner, {
+            var prefix = "days"
+            if (it.size <= 1) prefix = "day"
+            binding.days2.text = "${it.size} $prefix"
+
+            val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat()
+
+            val sickLeaveProgressBar = binding.sickLeaveProgressBar
+            sickLeaveProgressBar.apply {
+                progress = progressBarValue
+            }
+
+        })
+        leaveViewModel.getLeavesByStatusAndType("Maternity", "Approved").observe(viewLifecycleOwner, {
+            var prefix = "days"
+            if (it.size <= 1) prefix = "day"
+            binding.days3.text = "${it.size} $prefix"
+
+            val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat()
+
+            val maternityLeaveProgressBar = binding.maternityLeaveProgressBar
+            maternityLeaveProgressBar.apply {
+                progress = progressBarValue
+            }
+
+        })
+
     }
 
     private fun displayRecentPendingLeave() = binding.recentLeavesRecyclerView.apply {

@@ -48,6 +48,10 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         return leaveRepository.getRecentPendingLeave(status)
     }
 
+    fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>> {
+        return  leaveRepository.getLeavesByStatusAndType(leaveType, status)
+    }
+
 
     private fun hasInternet(): Boolean {
         val connectivityManager =

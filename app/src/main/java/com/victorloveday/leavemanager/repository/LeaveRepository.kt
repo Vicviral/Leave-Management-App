@@ -26,4 +26,8 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
         return leaveDao.getRecentPendingLeave(status)
     }
 
+    fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>> {
+        return leaveDao.getLeavesByStatusAndType(leaveType, status)
+    }
+
 }
