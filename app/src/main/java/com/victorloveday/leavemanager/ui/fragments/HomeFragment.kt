@@ -85,7 +85,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun fetchUserLeaveHistoryFromAPI() {
+    fun fetchUserLeaveHistoryFromAPI() {
         //make api request
         lifecycleScope.launchWhenCreated {
             response = try {
@@ -108,7 +108,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (response.isSuccessful && response.body() != null) {
 
                 if (response.body()!!.status == 1) {
-                    //upsert response to data base
+                    //upsert response to local data base
                     val result = response.body()!!.info
                     saveHistoryToDatabase(result)
 
@@ -127,6 +127,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun saveHistoryToDatabase(leave: List<Leave>) {
         leaveViewModel.saveLeave(leave)
+        Toast.makeText(requireContext(), "Successfully saved.", Toast.LENGTH_SHORT).show()
+
     }
 
     private fun disablePendingLeaveButtons() {

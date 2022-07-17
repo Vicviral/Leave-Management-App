@@ -8,17 +8,27 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.victorloveday.leavemanager.R
+import com.victorloveday.leavemanager.api.RetrofitInstance
+import com.victorloveday.leavemanager.database.model.HistoryResponse
+import com.victorloveday.leavemanager.database.model.LeaveApplicationResponse
 import com.victorloveday.leavemanager.databinding.FragmentHistoryBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
+import java.net.SocketTimeoutException
 
 class HistoryFragment : Fragment(R.layout.fragment_history) {
 
     private lateinit var binding: FragmentHistoryBinding
     private lateinit var historyAdapter: HistoryAdapter
     private lateinit var leaveViewModel: LeaveViewModel
+    private lateinit var response: Response<LeaveApplicationResponse>
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,11 +38,11 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
         setupHistoryRecyclerView()
-        deleteItemFromRecyclerView()
+        deleteLeave()
         switchTabs()
     }
 
-    private fun deleteItemFromRecyclerView() {
+    private fun deleteLeave() {
 
         historyAdapter.setOnLeaveClickListener { leave ->
             historyAdapter.onDeleteItem {
@@ -45,9 +55,9 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
                     dialog.show()
 
                     view.findViewById<LinearLayout>(R.id.deleteLeaveBS).setOnClickListener {
-                        leaveViewModel.deleteLeave(leave)
-                        dialog.dismiss()
-
+                        //this function only hides the deleted leave from the user's interface
+                        //all data remains persistent on the remote database
+                        deleteRowFromRemoteDatabase(leave.id.toString(), dialog)
                     }
                     view.findViewById<LinearLayout>(R.id.cancelLeaveBS).setOnClickListener {
                         dialog.dismiss()
@@ -60,6 +70,47 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
 
         }
 
+
+    }
+
+    private fun deleteRowFromRemoteDatabase(leaveId: String, dialog: BottomSheetDialog) {
+        lifecycleScope.launchWhenCreated {
+            response = try {
+                RetrofitInstance.api.deleteLeave(leaveId)
+
+            } catch (e: IOException) {
+                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            } catch (e: SocketTimeoutException) {
+                Toast.makeText(requireContext(), "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            }
+
+            if (response.isSuccessful && response.body() != null) {
+
+                if (response.body()!!.status == 1) {
+                    //leave has been successfully removed
+                    //upsert update response to local data base
+                    HomeFragment().fetchUserLeaveHistoryFromAPI()
+                    dialog.dismiss()
+
+                } else {
+                    Toast.makeText(requireContext(), "Failed ${response.body()}", Toast.LENGTH_SHORT).show()
+                }
+
+            } else {
+                Toast.makeText(requireContext(), "Failed: ${response.body()?.status}", Toast.LENGTH_SHORT).show()
+
+                return@launchWhenCreated
+            }
+
+        }
 
     }
 

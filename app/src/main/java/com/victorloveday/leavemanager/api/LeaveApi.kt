@@ -25,4 +25,9 @@ interface LeaveApi {
         @Query("leave_title") leave_title: String,
         @Query("leave_duration") leave_duration: String
     ): Response<LeaveApplicationResponse>
+
+    @GET("/leave/route/outgoing.php?")
+    suspend fun deleteLeave(
+        @Query("row_id") row_id: String
+    ): Response<LeaveApplicationResponse>
 }
