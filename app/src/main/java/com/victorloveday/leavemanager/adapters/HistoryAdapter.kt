@@ -3,14 +3,10 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.ItemHistoryBinding

@@ -10,11 +10,11 @@ import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
 import com.victorloveday.leavemanager.database.model.LeaveApplicationResponse
 import com.victorloveday.leavemanager.databinding.ActivityLeaveApplicationBinding
+import com.victorloveday.leavemanager.utils.DateFormatter
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import java.net.SocketTimeoutException
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -68,12 +68,12 @@ class LeaveApplicationActivity : AppCompatActivity() {
             datePicker.addOnPositiveButtonClickListener {
                 //start date
                 val st = datePicker.selection?.first
-                val formatSt = outputDateFormat.format(st)
+                val formatSt = DateFormatter().outputDateFormat.format(st)
                 startDate = formatSt
 
                 //end date
                 val en = datePicker.selection?.second
-                val formatEn =  outputDateFormat.format(en)
+                val formatEn =  DateFormatter().outputDateFormat.format(en)
                 endDate = formatEn
 
                 //leave duration
@@ -151,17 +151,13 @@ class LeaveApplicationActivity : AppCompatActivity() {
                 }
 
             } else {
-                Toast.makeText(this@LeaveApplicationActivity, "Failed: ${response.body()?.status}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LeaveApplicationActivity, "Response not successful: ${response.body()?.status}", Toast.LENGTH_SHORT).show()
 
                 return@launchWhenCreated
             }
 
         }
 
-    }
-
-    private val outputDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).apply {
-        timeZone = TimeZone.getTimeZone("UTC")
     }
 
     override fun onSupportNavigateUp(): Boolean {
