@@ -55,9 +55,6 @@ class MainActivity : AppCompatActivity() {
             return@setOnItemReselectedListener
         }
 
-        //set visibility of toolbar icons
-        setVisibilityStateForToolbarIcons()
-
         //feeds icon badge badge
         val badge = binding.bottomNavigationView.getOrCreateBadge(R.id.homeFragment)
         badge.isVisible = true
@@ -71,62 +68,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LeaveApplicationActivity::class.java))
             overridePendingTransition(R.anim.slide_in_bottom,  R.anim.slide_out_top)
         }
-
-    }
-
-    private fun setVisibilityStateForToolbarIcons() {
-        binding.bottomNavigationView.menu.findItem(R.id.homeFragment)?.setOnMenuItemClickListener {
-            bottomNavIcon = 1
-            hideIconSet1()
-
-            return@setOnMenuItemClickListener false
-        }
-        binding.bottomNavigationView.menu.findItem(R.id.historyFragment)?.setOnMenuItemClickListener {
-            bottomNavIcon = 2
-            hideIconSet2()
-
-            return@setOnMenuItemClickListener false
-        }
-        binding.bottomNavigationView.menu.findItem(R.id.notificationFragment)?.setOnMenuItemClickListener {
-            bottomNavIcon = 3
-            hideIconSet3()
-
-            return@setOnMenuItemClickListener false
-        }
-        binding.bottomNavigationView.menu.findItem(R.id.profileFragment)?.setOnMenuItemClickListener {
-            bottomNavIcon = 4
-            hideIconSet4()
-
-            return@setOnMenuItemClickListener false
-        }
-
-    }
-
-    private fun hideIconSet4() {
-        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
-        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
-        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
-
-    }
-
-    private fun hideIconSet3() {
-        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
-        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = true
-        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
-
-    }
-
-    private fun hideIconSet2() {
-        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = true
-        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
-        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = true
-
-    }
-
-    private fun hideIconSet1() {
-        toolbarMenu?.findItem(R.id.searchLeaves)?.isVisible = false
-        toolbarMenu?.findItem(R.id.searchNotifications)?.isVisible = false
-        toolbarMenu?.findItem(R.id.filterLeaves)?.isVisible = false
 
     }
 
