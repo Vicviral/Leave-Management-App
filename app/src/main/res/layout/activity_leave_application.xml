@@ -33,7 +33,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/declined_bg"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_date_range_24"
+                android:src="@drawable/orange_work"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +71,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/declined_bg"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_date_range_24"
+                android:src="@drawable/orange_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/icon1" />
 
@@ -111,7 +111,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/declined_bg"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_date_range_24"
+                android:src="@drawable/orange_waves"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/icon2" />
 
@@ -153,11 +153,11 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/declined_bg"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_date_range_24"
+                android:src="@drawable/orange_date"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/leaveDescription" />
 
-            <LinearLayout
+            <Button
                 android:id="@+id/pickDate"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -165,26 +165,17 @@
                 android:background="@drawable/secondary_icon_bg"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:text="Pick Date"
                 app:layout_constraintBottom_toBottomOf="@id/icon4"
                 app:layout_constraintStart_toEndOf="@id/icon4"
-                app:layout_constraintTop_toTopOf="@id/icon4">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pick Date"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toTopOf="@id/icon4" />
 
             <TextView
                 android:id="@+id/leaveDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="e.g: July 12 - Aug 11"
+                android:text=""
                 app:layout_constraintStart_toEndOf="@id/pickDate"
                 app:layout_constraintBottom_toBottomOf="@id/pickDate"
                 app:layout_constraintTop_toTopOf="@id/pickDate"/>
@@ -193,25 +184,17 @@
 
     </ScrollView>
 
-    <LinearLayout
+    <Button
         android:id="@+id/applyForLeaveBtn"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="20dp"
         android:elevation="5dp"
         android:background="@drawable/edit_btn_bg"
+        android:text="Apply For Leave"
         android:gravity="center"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/edit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apply For Leave"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
