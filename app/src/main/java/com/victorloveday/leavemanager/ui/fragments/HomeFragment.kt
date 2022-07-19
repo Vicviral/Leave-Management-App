@@ -75,15 +75,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
         })
-        leaveViewModel.getLeavesByStatusAndType("Maternity", "Approved").observe(viewLifecycleOwner, {
+        leaveViewModel.getLeavesByStatusAndType("Annual", "Approved").observe(viewLifecycleOwner, {
             var prefix = "days"
             if (it.size <= 1) prefix = "day"
             binding.days3.text = "${it.size} $prefix"
 
             val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat()
 
-            val maternityLeaveProgressBar = binding.maternityLeaveProgressBar
-            maternityLeaveProgressBar.apply {
+            val annualLeaveProgressBar = binding.annualLeaveProgressBar
+            annualLeaveProgressBar.apply {
                 progress = progressBarValue
             }
 

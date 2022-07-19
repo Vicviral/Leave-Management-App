@@ -5,5 +5,7 @@
         android:title="@string/casual"/>
     <item android:id="@+id/sick"
         android:title="@string/sick"/>
+    <item android:id="@+id/annual"
+        android:title="@string/annual"/>
 
 </menu>

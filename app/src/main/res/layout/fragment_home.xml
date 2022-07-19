@@ -144,7 +144,7 @@
                     android:layout_margin="10dp">
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                        android:id="@+id/maternityLeaveProgressBar"
+                        android:id="@+id/annualLeaveProgressBar"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         app:cpb_background_progressbar_color="#4D1181C8"
@@ -161,10 +161,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/casual_leave_icon"
-                        app:layout_constraintTop_toTopOf="@id/maternityLeaveProgressBar"
-                        app:layout_constraintBottom_toBottomOf="@+id/maternityLeaveProgressBar"
-                        app:layout_constraintEnd_toEndOf="@id/maternityLeaveProgressBar"
-                        app:layout_constraintStart_toStartOf="@+id/maternityLeaveProgressBar"/>
+                        app:layout_constraintTop_toTopOf="@id/annualLeaveProgressBar"
+                        app:layout_constraintBottom_toBottomOf="@+id/annualLeaveProgressBar"
+                        app:layout_constraintEnd_toEndOf="@id/annualLeaveProgressBar"
+                        app:layout_constraintStart_toStartOf="@+id/annualLeaveProgressBar"/>
 
 
                     <LinearLayout
@@ -172,9 +172,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="@id/maternityLeaveProgressBar"
-                        app:layout_constraintStart_toEndOf="@id/maternityLeaveProgressBar"
-                        app:layout_constraintTop_toTopOf="@+id/maternityLeaveProgressBar">
+                        app:layout_constraintBottom_toBottomOf="@id/annualLeaveProgressBar"
+                        app:layout_constraintStart_toEndOf="@id/annualLeaveProgressBar"
+                        app:layout_constraintTop_toTopOf="@+id/annualLeaveProgressBar">
 
                         <TextView
                             android:id="@+id/days3"
@@ -187,7 +187,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Maternity Leave" />
+                            android:text="Annual Leave" />
 
                     </LinearLayout>
 
