@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.ItemHistoryBinding
+import java.text.SimpleDateFormat
 
 class HistoryAdapter(private val context: Context) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
@@ -50,6 +51,8 @@ class HistoryAdapter(private val context: Context) :
             leaveDescription.text = leave.leave_message
             leaveStatus.text = leave.status
             leaveDuration.text = leave.leave_duration
+
+
 
             //set status color
             when(leave.status) {

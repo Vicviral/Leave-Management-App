@@ -47,5 +47,22 @@ class DateFormatter {
                 "${if(milliseconds < 10) "0" else ""}$milliseconds"
     }
 
+    private fun salutation() {
+        val c: Calendar = Calendar.getInstance()
+        val timeOfDay: Int = c.get(Calendar.HOUR_OF_DAY)
+        var greet = ""
+
+        if (timeOfDay in 0..11) {
+            greet = "Good Morning"
+        } else if (timeOfDay >= 12 && timeOfDay < 16) {
+            greet = "Good Afternoon"
+        } else if (timeOfDay >= 16 && timeOfDay < 21) {
+            greet = "Good Evening"
+        } else if (timeOfDay >= 21 && timeOfDay < 24) {
+            greet = "Good Night"
+        }
+    }
+
+
 
 }
