@@ -47,7 +47,7 @@ class DateFormatter {
                 "${if(milliseconds < 10) "0" else ""}$milliseconds"
     }
 
-    private fun salutation() {
+    fun salutation() {
         val c: Calendar = Calendar.getInstance()
         val timeOfDay: Int = c.get(Calendar.HOUR_OF_DAY)
         var greet = ""
@@ -63,6 +63,12 @@ class DateFormatter {
         }
     }
 
+    fun getMeridian(): String {
+        val c: Calendar = Calendar.getInstance()
+        val timeOfDay: Int = c.get(Calendar.HOUR_OF_DAY)
+
+        return if (timeOfDay in 0..12) "AM" else "PM"
+    }
 
 
 }

@@ -53,7 +53,6 @@ class HistoryAdapter(private val context: Context) :
             leaveDuration.text = leave.leave_duration
 
 
-
             //set status color
             when(leave.status) {
                 "Pending" -> {
