@@ -20,6 +20,7 @@ import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
 import com.victorloveday.leavemanager.ui.viewmodels.LeaveViewModel
 import com.victorloveday.leavemanager.utils.Constants.Companion.GIVEN_ANNUAL_LEAVE
+import com.victorloveday.leavemanager.utils.Constants.Companion.GIVEN_CASUAL_LEAVE
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -54,7 +55,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (it.size <= 1) prefix = "day"
             binding.days1.text = "${it.size} $prefix"
 
-            val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat() * it.size
+            val progressBarValue = 100f / GIVEN_CASUAL_LEAVE.toFloat() * it.size
 
             val casualLeaveProgressBar = binding.casualLeaveProgressBar
             casualLeaveProgressBar.apply {
@@ -67,11 +68,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (it.size <= 1) prefix = "day"
             binding.days2.text = "${it.size} $prefix"
 
-            val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat()
 
             val sickLeaveProgressBar = binding.sickLeaveProgressBar
             sickLeaveProgressBar.apply {
-                progress = progressBarValue
+                progress = it.size.toFloat()
             }
 
         })
@@ -84,7 +84,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             val annualLeaveProgressBar = binding.annualLeaveProgressBar
             annualLeaveProgressBar.apply {
-                progress = progressBarValue
+                progress = if (it.isEmpty()) 0f else progressBarValue
             }
 
         })

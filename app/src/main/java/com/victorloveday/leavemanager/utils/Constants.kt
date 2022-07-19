@@ -6,5 +6,6 @@ class Constants {
         const val SEARCH_LEAVE_DELAY_TIME =  500L
 
         const val GIVEN_ANNUAL_LEAVE = 28
+        const val GIVEN_CASUAL_LEAVE = 14
     }
 }
