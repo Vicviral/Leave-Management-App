@@ -90,7 +90,7 @@
             app:layout_constraintTop_toTopOf="@id/label1" />
 
         <TextView
-            android:id="@+id/notificationBody"
+            android:id="@+id/leaveDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -106,11 +106,11 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/share_bg"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notificationBody" />
+            app:layout_constraintTop_toBottomOf="@id/leaveDescription" />
 
 
         <TextView
-            android:id="@+id/notificationDate"
+            android:id="@+id/leaveYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -129,7 +129,7 @@
             android:background="@drawable/share_bg"
             android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toStartOf="@id/leaveTime"
-            app:layout_constraintTop_toBottomOf="@id/notificationBody" />
+            app:layout_constraintTop_toBottomOf="@id/leaveDescription" />
 
         <TextView
             android:id="@+id/leaveTime"
@@ -154,8 +154,8 @@
             android:background="@drawable/delete_leave_bg"
             android:padding="3dp"
             android:src="@drawable/delete_leave"
-            app:layout_constraintTop_toTopOf="@id/notificationDate"
-            app:layout_constraintBottom_toBottomOf="@id/notificationDate" />
+            app:layout_constraintTop_toTopOf="@id/leaveYear"
+            app:layout_constraintBottom_toBottomOf="@id/leaveYear" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/shareLeaveDetailsIcon"

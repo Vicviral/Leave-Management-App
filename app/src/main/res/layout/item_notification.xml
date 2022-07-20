@@ -23,9 +23,9 @@
             android:id="@+id/notificationIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/date_bg"
+            android:background="@drawable/blue_cirlce"
             android:padding="5dp"
-            android:src="@drawable/ic_baseline_date_range_24"
+            android:src="@drawable/ic_notification_selected_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,33 +93,6 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/dot"
             app:layout_constraintTop_toTopOf="@id/dot" />
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/deleteLeave"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@id/shareLeaveDetailsIcon"
-            android:background="@drawable/delete_leave_bg"
-            android:padding="3dp"
-            android:src="@drawable/delete_leave"
-            app:layout_constraintTop_toTopOf="@id/notificationDate"
-            app:layout_constraintBottom_toBottomOf="@id/notificationDate" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/shareLeaveDetailsIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:visibility="gone"
-            android:background="@drawable/share_bg"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_share_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/deleteLeave"
-            app:layout_constraintBottom_toBottomOf="@id/deleteLeave"
-            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

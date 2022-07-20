@@ -57,8 +57,10 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
 
 
     //notifications
-    suspend fun saveNotification(notification: List<Notification>) {
-        return leaveRepository.saveNotification(notification)
+    fun saveNotification(notification: List<Notification>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            leaveRepository.saveNotification(notification)
+        }
     }
 
 

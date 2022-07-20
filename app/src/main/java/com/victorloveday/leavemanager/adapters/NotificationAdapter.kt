@@ -53,10 +53,12 @@ class NotificationAdapter(private val context: Context) :
             //set status color
             when(notification.title) {
                 "Application Approved" -> {
-                    notificationIcon.setImageResource(R.drawable.pending_bg)
+                    notificationIcon.setBackgroundResource(R.drawable.green_cirlce)
+                    notificationIcon.setImageResource(R.drawable.ic_baseline_done_all_24)
                 }
                 "Application Declined" -> {
-                    notificationIcon.setImageResource(R.drawable.approved_bg)
+                    notificationIcon.setBackgroundResource(R.drawable.red_cirlce)
+                    notificationIcon.setImageResource(R.drawable.ic_baseline_south_west_24)
                 }
             }
 

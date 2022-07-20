@@ -7,7 +7,6 @@
         android:id="@+id/notificationRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
         android:layout_marginTop="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

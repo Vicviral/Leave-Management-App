@@ -49,8 +49,8 @@
             android:background="@drawable/delete_leave_bg"
             android:padding="3dp"
             android:src="@drawable/delete_leave"
-            app:layout_constraintTop_toTopOf="@id/notificationDate"
-            app:layout_constraintBottom_toBottomOf="@id/notificationDate" />
+            app:layout_constraintTop_toTopOf="@id/leaveYear"
+            app:layout_constraintBottom_toBottomOf="@id/leaveYear" />
 
     <LinearLayout
         android:id="@+id/deleteLeaveBS"

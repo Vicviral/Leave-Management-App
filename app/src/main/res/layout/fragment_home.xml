@@ -291,7 +291,7 @@
                     app:layout_constraintTop_toTopOf="@id/label1" />
 
                 <TextView
-                    android:id="@+id/notificationBody"
+                    android:id="@+id/leaveDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -308,7 +308,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:weightSum="2"
-                    app:layout_constraintTop_toBottomOf="@id/notificationBody">
+                    app:layout_constraintTop_toBottomOf="@id/leaveDescription">
 
                     <LinearLayout
                         android:id="@+id/cancelLeave"
