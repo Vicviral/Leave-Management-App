@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.asLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.victorloveday.leavemanager.R
+import com.victorloveday.leavemanager.database.UserInfoManager
 import com.victorloveday.leavemanager.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,14 +26,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
     private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var userInfoManager: UserInfoManager
 
     var toolbarMenu: Menu? = null
-
-    var bottomNavIcon = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        userInfoManager = UserInfoManager(this)
+        userInfoManager.typeFlow.asLiveData().observe(this, {
+            if (it == "Admin") {
+                binding.employees.visibility = View.VISIBLE
+            }
+        })
         setContentView(binding.root)
 
         historyAdapter = HistoryAdapter(this)
@@ -67,6 +74,10 @@ class MainActivity : AppCompatActivity() {
         binding.applyForLeave.setOnClickListener {
             startActivity(Intent(this, LeaveApplicationActivity::class.java))
             overridePendingTransition(R.anim.slide_in_bottom,  R.anim.slide_out_top)
+        }
+
+        binding.employees.setOnClickListener {
+            //employees activity
         }
 
     }

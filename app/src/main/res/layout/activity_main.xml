@@ -10,15 +10,27 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"/>
+        android:layout_gravity="top">
 
-<!--    <TextView-->
-<!--        android:id="@+id/demo"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:gravity="center"-->
-<!--        android:textSize="30sp"-->
-<!--        android:text="Demo"/>-->
+        <ImageView
+            android:id="@+id/employees"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/declined_bg"
+            android:src="@drawable/ic_baseline_people_24"
+            android:visibility="gone" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/demo"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:gravity="center"-->
+    <!--        android:textSize="30sp"-->
+    <!--        android:text="Demo"/>-->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostFragment"
@@ -27,8 +39,8 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
 
@@ -36,7 +48,7 @@
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom" >
+        android:layout_gravity="bottom">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -53,10 +65,10 @@
         android:id="@+id/applyForLeave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:borderWidth="0dp"
-        android:contentDescription="@string/apply_for_leave"
         android:backgroundTint="@color/orange"
+        android:contentDescription="@string/apply_for_leave"
         android:src="@drawable/ic_baseline_add_24"
+        app:borderWidth="0dp"
         app:layout_anchor="@id/bottomAppBar" />
 
 
