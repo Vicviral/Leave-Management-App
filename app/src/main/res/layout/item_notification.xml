@@ -19,82 +19,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/leaveTittle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Leave Tittle"
-            android:textSize="16sp"
-            android:layout_marginEnd="16dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/leaveStatus"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/leaveType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Leave Type"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/leaveTittle" />
-
-        <TextView
-            android:id="@+id/leaveStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/declined_bg"
-            android:paddingStart="8dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="5dp"
-            android:text="Status"
-            android:textColor="@color/orange"
-            app:layout_constraintBottom_toBottomOf="@id/leaveType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/leaveTittle" />
-
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/notificationIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/date_bg"
             android:padding="5dp"
             android:src="@drawable/ic_baseline_date_range_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/leaveType" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/label1"
+            android:id="@+id/notificationTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Leave Duration:"
+            android:text="Notification Title"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/notificationIcon"
             app:layout_constraintStart_toEndOf="@id/notificationIcon"
             app:layout_constraintTop_toTopOf="@id/notificationIcon" />
-
-        <TextView
-            android:id="@+id/leaveDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="29th Jan - 5th Feb"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/label1"
-            app:layout_constraintStart_toEndOf="@id/label1"
-            app:layout_constraintTop_toTopOf="@id/label1" />
 
         <TextView
             android:id="@+id/notificationBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Write a description explaining why you need this leave. Write a description explaining why you need this leave"
+            android:text="Body of the leave"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notificationIcon" />
@@ -128,11 +79,11 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/share_bg"
             android:layout_marginEnd="5dp"
-            app:layout_constraintEnd_toStartOf="@id/leaveTime"
+            app:layout_constraintEnd_toStartOf="@id/notificationTime"
             app:layout_constraintTop_toBottomOf="@id/notificationBody" />
 
         <TextView
-            android:id="@+id/leaveTime"
+            android:id="@+id/notificationTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

@@ -127,7 +127,7 @@
                 app:layout_constraintTop_toTopOf="@id/icon3" />
 
             <EditText
-                android:id="@+id/leaveDescription"
+                android:id="@+id/notificationBody"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="10dp"
@@ -155,7 +155,7 @@
                 android:padding="8dp"
                 android:src="@drawable/orange_date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/leaveDescription" />
+                app:layout_constraintTop_toBottomOf="@id/notificationBody" />
 
             <Button
                 android:id="@+id/pickDate"

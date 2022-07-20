@@ -259,7 +259,7 @@
 
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/dateIcon"
+                    android:id="@+id/notificationIcon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="20dp"
@@ -275,9 +275,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Leave Duration:"
-                    app:layout_constraintBottom_toBottomOf="@id/dateIcon"
-                    app:layout_constraintStart_toEndOf="@id/dateIcon"
-                    app:layout_constraintTop_toTopOf="@id/dateIcon" />
+                    app:layout_constraintBottom_toBottomOf="@id/notificationIcon"
+                    app:layout_constraintStart_toEndOf="@id/notificationIcon"
+                    app:layout_constraintTop_toTopOf="@id/notificationIcon" />
 
                 <TextView
                     android:id="@+id/duration"
@@ -291,14 +291,14 @@
                     app:layout_constraintTop_toTopOf="@id/label1" />
 
                 <TextView
-                    android:id="@+id/leaveDescription"
+                    android:id="@+id/notificationBody"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Write a description explaining why you need this leave. Write a description explaining why you need this leave"
+                    android:text="Write a detailed description explaining why you need this leave. Write a detailed description explaining why you need this leave"
                     android:textStyle="italic"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/dateIcon" />
+                    app:layout_constraintTop_toBottomOf="@id/notificationIcon" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -308,7 +308,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:weightSum="2"
-                    app:layout_constraintTop_toBottomOf="@id/leaveDescription">
+                    app:layout_constraintTop_toBottomOf="@id/notificationBody">
 
                     <LinearLayout
                         android:id="@+id/cancelLeave"

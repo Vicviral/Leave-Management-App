@@ -30,7 +30,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/dateIcon"
+            android:id="@+id/notificationIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
@@ -49,8 +49,8 @@
             android:background="@drawable/delete_leave_bg"
             android:padding="3dp"
             android:src="@drawable/delete_leave"
-            app:layout_constraintTop_toTopOf="@id/leaveYear"
-            app:layout_constraintBottom_toBottomOf="@id/leaveYear" />
+            app:layout_constraintTop_toTopOf="@id/notificationDate"
+            app:layout_constraintBottom_toBottomOf="@id/notificationDate" />
 
     <LinearLayout
         android:id="@+id/deleteLeaveBS"
