@@ -3,6 +3,7 @@ package com.victorloveday.leavemanager.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.victorloveday.leavemanager.database.model.Leave
+import com.victorloveday.leavemanager.database.model.Notification
 
 @Dao
 interface LeaveDao {
@@ -27,5 +28,14 @@ interface LeaveDao {
 
     @Query("SELECT * FROM leaves_table WHERE leave_type = :leaveType AND status = :status ")
     fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>>
+
+
+    //notifications
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveNotification(leave: List<Notification>)
+
+    @Query("SELECT * FROM notification_table ORDER BY id DESC")
+    fun getAllNotifications(): LiveData<List<Notification>>
 
 }

@@ -36,8 +36,6 @@ class NotificationFragment : Fragment(R.layout.fragment_notification) {
         adapter = notificationAdapter
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        leaveViewModel.readRecentFiveLeaves.observe(viewLifecycleOwner, {
-        })
 
     }
 

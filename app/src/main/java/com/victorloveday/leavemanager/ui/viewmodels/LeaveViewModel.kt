@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.victorloveday.leavemanager.application.LeaveApplication
 import com.victorloveday.leavemanager.database.UserDatabase
 import com.victorloveday.leavemanager.database.model.Leave
+import com.victorloveday.leavemanager.database.model.Notification
 import com.victorloveday.leavemanager.repository.LeaveRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
 class LeaveViewModel(application: Application) : AndroidViewModel(application) {
     val readAllLeaveHistory: LiveData<List<Leave>>
     val readRecentFiveLeaves: LiveData<List<Leave>>
+    val readAllNotification: LiveData<List<Notification>>
     private val leaveRepository: LeaveRepository
 
 
@@ -26,6 +28,7 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         leaveRepository = LeaveRepository(leaveDao)
         readAllLeaveHistory = leaveRepository.readAllLeaveHistory
         readRecentFiveLeaves = leaveRepository.readRecentFiveLeaves
+        readAllNotification = leaveRepository.readAllNotifications
     }
 
     fun saveLeave(leave: List<Leave>) {
@@ -50,6 +53,12 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>> {
         return  leaveRepository.getLeavesByStatusAndType(leaveType, status)
+    }
+
+
+    //notifications
+    suspend fun saveNotification(notification: List<Notification>) {
+        return leaveRepository.saveNotification(notification)
     }
 
 
