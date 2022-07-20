@@ -60,6 +60,10 @@ class NotificationAdapter(private val context: Context) :
                     notificationIcon.setBackgroundResource(R.drawable.red_cirlce)
                     notificationIcon.setImageResource(R.drawable.ic_baseline_south_west_24)
                 }
+                "Leave Expiration" -> {
+                    notificationIcon.setBackgroundResource(R.drawable.blue_cirlce)
+                    notificationIcon.setImageResource(R.drawable.ic_notification_selected_icon)
+                }
             }
 
         }
