@@ -2,6 +2,7 @@ package com.victorloveday.leavemanager.api
 
 import com.victorloveday.leavemanager.database.model.HistoryResponse
 import com.victorloveday.leavemanager.database.model.LeaveApplicationResponse
+import com.victorloveday.leavemanager.database.model.LoginResponse
 import com.victorloveday.leavemanager.database.model.NotificationResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -9,6 +10,14 @@ import retrofit2.http.Query
 
 interface LeaveApi {
 
+    //auth
+    @GET("/leave/route/outgoing.php?")
+    suspend fun loginUser(
+        @Query("userId") userId: String,
+        @Query("password") password: String
+    ):Response<LoginResponse>
+
+    //leaves
     @GET("/leave/route/outgoing.php?")
     suspend fun getLeaves(
         @Query("employeeLeaves") employeeLeaves: String,
