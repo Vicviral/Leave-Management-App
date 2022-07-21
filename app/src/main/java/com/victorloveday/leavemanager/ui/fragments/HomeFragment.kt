@@ -132,7 +132,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    fun fetchUserLeaveHistoryFromAPI() {
+    private fun fetchUserLeaveHistoryFromAPI() {
         //make api request
         lifecycleScope.launchWhenCreated {
             response = try {

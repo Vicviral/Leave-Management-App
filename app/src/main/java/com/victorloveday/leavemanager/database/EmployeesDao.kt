@@ -12,7 +12,7 @@ interface EmployeesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveEmployees(leave: List<User>)
 
-    @Query("SELECT * FROM leaves_table ORDER BY id DESC")
+    @Query("SELECT * FROM employee_table ORDER BY id DESC")
     fun getAllEmployee(): LiveData<List<User>>
 
 }
