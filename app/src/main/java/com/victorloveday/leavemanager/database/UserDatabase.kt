@@ -6,10 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.Notification
+import com.victorloveday.leavemanager.database.model.User
 
-@Database(entities = [Leave::class, Notification::class], version = 1)
+@Database(entities = [Leave::class, Notification::class, User::class], version = 1)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun leaveDao(): LeaveDao
+    abstract fun employeesDao(): EmployeesDao
 
     companion object {
         @Volatile

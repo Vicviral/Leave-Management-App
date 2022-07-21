@@ -34,7 +34,6 @@ interface LeaveDao {
 
 
     //notifications
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveNotification(leave: List<Notification>)
 
