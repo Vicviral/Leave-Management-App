@@ -55,6 +55,11 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         return  leaveRepository.getLeavesByStatusAndType(leaveType, status)
     }
 
+    fun getAllLeaveHistoryByUserId(userId: String): LiveData<List<Leave>> {
+        return leaveRepository.getAllLeaveHistoryByUserId(userId)
+    }
+
+
 
     //notifications
     fun saveNotification(notification: List<Notification>) {

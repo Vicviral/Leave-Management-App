@@ -16,7 +16,7 @@
         <activity
             android:name=".ui.EmployeeActivity"
             android:exported="true"
-            android:label="Manage Employees"/>
+            android:label="Employees"/>
         <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="true" />

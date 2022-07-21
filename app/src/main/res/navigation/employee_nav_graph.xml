@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/employee_nav_graph"
+    app:startDestination="@id/employeesFragment">
+    <fragment
+        android:id="@+id/employeesFragment"
+        android:name="com.victorloveday.leavemanager.ui.fragments.EmployeesFragment"
+        android:label="Manage Employees">
+        <action
+            android:id="@+id/action_employeesFragment_to_viewEmployeeProfileFragment"
+            app:destination="@id/viewEmployeeProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewEmployeeProfileFragment"
+        android:name="com.victorloveday.leavemanager.ui.fragments.ProfileFragment"
+        android:label="Employee's Profile">
+        <action
+            android:id="@+id/action_viewEmployeeProfileFragment_to_viewEmployeeHistoryFragment"
+            app:destination="@id/viewEmployeeHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewEmployeeHistoryFragment"
+        android:name="com.victorloveday.leavemanager.ui.fragments.HistoryFragment"
+        android:label="Employee's History" />
+</navigation>

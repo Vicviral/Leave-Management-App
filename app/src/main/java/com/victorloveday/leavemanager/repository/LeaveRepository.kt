@@ -21,7 +21,7 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
     }
 
     fun getLeaveHistoryByLeaveType(leaveType: String): LiveData<List<Leave>> {
-        return leaveDao.getLeaveHistoryByLeaveType(leaveType)
+        return leaveDao.getLeaveHistoryByLeaveTypeAndUserId(leaveType)
     }
 
     fun getRecentPendingLeave(status: String): LiveData<List<Leave>> {
@@ -30,6 +30,10 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
 
     fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>> {
         return leaveDao.getLeavesByStatusAndType(leaveType, status)
+    }
+
+    fun getAllLeaveHistoryByUserId(userId: String): LiveData<List<Leave>> {
+        return leaveDao.getAllLeaveHistoryByUserId(userId)
     }
 
     //notifications
