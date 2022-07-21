@@ -6,5 +6,6 @@ data class User(
     val age: String,
     val role: String,
     val userType: String,
-    val isOnLeave: Boolean
+    val isOnLeave: Boolean,
+    val isDeactivated: Boolean
 )

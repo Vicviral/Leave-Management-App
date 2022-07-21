@@ -77,7 +77,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.employees.setOnClickListener {
-            //employees activity
+            startActivity(Intent(this, EmployeeActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_bottom,  R.anim.slide_out_top)
         }
 
     }

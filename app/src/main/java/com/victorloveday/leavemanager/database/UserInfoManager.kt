@@ -18,6 +18,7 @@ class UserInfoManager(context: Context) {
         val ROLE_KEY = preferencesKey<String>("ROLE")
         val USER_TYPE_KEY = preferencesKey<String>("USER_TYPE")
         val USER_ON_LEAVE_KEY = preferencesKey<Boolean>("USER_ON_LEAVE")
+        val USER_DEACTIVATED_KEY = preferencesKey<Boolean>("USER_DEACTIVATED")
     }
 
     suspend fun clearUser() {
@@ -26,7 +27,7 @@ class UserInfoManager(context: Context) {
         }
     }
 
-    suspend fun storeUser(name: String, userId: String, age: String, role: String, userType: String, isOnLeave: Boolean) {
+    suspend fun storeUser(name: String, userId: String, age: String, role: String, userType: String, isOnLeave: Boolean, isDeactivated: Boolean) {
         dataStore.edit {
             it[NAME_KEY] = name
             it[USER_ID_KEY] = userId
@@ -34,6 +35,7 @@ class UserInfoManager(context: Context) {
             it[ROLE_KEY] = role
             it[USER_TYPE_KEY] = userType
             it[USER_ON_LEAVE_KEY] = isOnLeave
+            it[USER_DEACTIVATED_KEY] = isDeactivated
         }
     }
 
@@ -54,6 +56,9 @@ class UserInfoManager(context: Context) {
     }
     val onLeave: Flow<Boolean> = dataStore.data.map {
         it[USER_ON_LEAVE_KEY] ?: false
+    }
+    val deactivated: Flow<Boolean> = dataStore.data.map {
+        it[USER_DEACTIVATED_KEY] ?: false
     }
 
 }

@@ -76,8 +76,9 @@ class LoginActivity : AppCompatActivity() {
                     val age = result.age
                     val userType = result.userType
                     val isOnLeave = result.isOnLeave
+                    val isDeactivated = result.isDeactivated
 
-                    userInfoManager.storeUser(name, userID, age, role,userType, isOnLeave)
+                    userInfoManager.storeUser(name, userID, age, role,userType, isOnLeave, isDeactivated)
 
                     //navigate to main app
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))

@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LeaveManager">
         <activity
+            android:name=".ui.EmployeeActivity"
+            android:exported="true"
+            android:label="Manage Employees"/>
+        <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="true" />
         <activity
