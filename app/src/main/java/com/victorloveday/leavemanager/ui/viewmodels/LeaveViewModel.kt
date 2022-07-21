@@ -43,8 +43,8 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getLeaveHistoryByLeaveType(leaveType: String): LiveData<List<Leave>> {
-        return leaveRepository.getLeaveHistoryByLeaveType(leaveType)
+    fun getLeaveHistoryByLeaveTypeAndUserId(leaveType: String, userId: String): LiveData<List<Leave>> {
+        return leaveRepository.getLeaveHistoryByLeaveTypeAndUserId(leaveType, userId)
     }
 
     fun getRecentPendingLeave(status: String): LiveData<List<Leave>> {

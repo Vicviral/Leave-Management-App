@@ -20,8 +20,8 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
         leaveDao.deleteLeave(leave)
     }
 
-    fun getLeaveHistoryByLeaveType(leaveType: String): LiveData<List<Leave>> {
-        return leaveDao.getLeaveHistoryByLeaveTypeAndUserId(leaveType)
+    fun getLeaveHistoryByLeaveTypeAndUserId(leaveType: String, userId: String): LiveData<List<Leave>> {
+        return leaveDao.getLeaveHistoryByLeaveTypeAndUserId(leaveType, userId)
     }
 
     fun getRecentPendingLeave(status: String): LiveData<List<Leave>> {

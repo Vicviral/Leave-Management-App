@@ -128,7 +128,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         layoutManager = LinearLayoutManager(requireContext())
         setPadding(0, 0, 0, 100)
 
-        leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
+        leaveViewModel.getAllLeaveHistoryByUserId("5").observe(viewLifecycleOwner, {
 
             if (it.isNotEmpty()) {
                 historyAdapter.setData(it)
@@ -149,19 +149,19 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
 
             when(selectedTb) {
                 R.id.tab1 -> {
-                    leaveViewModel.readAllLeaveHistory.observe(viewLifecycleOwner, {
+                    leaveViewModel.getAllLeaveHistoryByUserId("5").observe(viewLifecycleOwner, {
                         binding.historyRecyclerView.startAnimation(slideFromBottom)
                         historyAdapter.setData(it)
                     })
                 }
                 R.id.tab2 -> {
-                    leaveViewModel.getLeaveHistoryByLeaveType("Casual").observe(viewLifecycleOwner, {
+                    leaveViewModel.getLeaveHistoryByLeaveTypeAndUserId("Casual", "5").observe(viewLifecycleOwner, {
                         binding.historyRecyclerView.startAnimation(slideFromBottom)
                         historyAdapter.setData(it)
                     })
                 }
                 R.id.tab3 -> {
-                    leaveViewModel.getLeaveHistoryByLeaveType("Sick").observe(viewLifecycleOwner, {
+                    leaveViewModel.getLeaveHistoryByLeaveTypeAndUserId("Sick", "5").observe(viewLifecycleOwner, {
                         binding.historyRecyclerView.startAnimation(slideFromBottom)
                         historyAdapter.setData(it)
                     })

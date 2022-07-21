@@ -20,8 +20,8 @@ interface LeaveDao {
     @Query("SELECT * FROM leaves_table WHERE `user_id` = :userId ORDER BY id DESC")
     fun getAllLeaveHistoryByUserId(userId: String): LiveData<List<Leave>>
 
-    @Query("SELECT * FROM leaves_table WHERE `leave_type` = :leaveType")
-    fun getLeaveHistoryByLeaveTypeAndUserId(leaveType: String): LiveData<List<Leave>>
+    @Query("SELECT * FROM leaves_table WHERE `leave_type` = :leaveType AND user_id = :userId")
+    fun getLeaveHistoryByLeaveTypeAndUserId(leaveType: String, userId: String): LiveData<List<Leave>>
 
     @Query("SELECT * FROM leaves_table ORDER BY id DESC LIMIT 5")
     fun getRecentFiveLeaves(): LiveData<List<Leave>>

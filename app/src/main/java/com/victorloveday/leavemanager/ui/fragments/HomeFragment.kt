@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
 import com.victorloveday.leavemanager.database.model.HistoryResponse
