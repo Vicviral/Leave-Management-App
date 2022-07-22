@@ -40,18 +40,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/leaveType" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@id/shareLeaveDetailsIcon"
-            android:background="@drawable/delete_leave_bg"
-            android:padding="3dp"
-            android:src="@drawable/delete_leave"
-            app:layout_constraintTop_toTopOf="@id/leaveYear"
-            app:layout_constraintBottom_toBottomOf="@id/leaveYear" />
-
     <LinearLayout
         android:id="@+id/deleteLeaveBS"
         android:layout_width="match_parent"
@@ -84,20 +72,5 @@
             android:text="@string/cancel" />
 
     </LinearLayout>
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/shareLeaveDetailsIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:visibility="gone"
-            android:background="@drawable/share_bg"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_share_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/deleteLeave"
-            app:layout_constraintBottom_toBottomOf="@id/deleteLeave"
-            />
-
-
 
 </LinearLayout>

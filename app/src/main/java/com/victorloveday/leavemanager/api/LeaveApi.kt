@@ -54,4 +54,16 @@ interface LeaveApi {
         @Query("employees") employees: String,
         @Query("userId") userId: String,
     ): Response<EmployeesResponse>
+
+    @GET("/leave/route/outgoing.php?")
+    suspend fun addEmployee(
+        @Query("addEmployee") addEmployee: String,
+        @Query("full_name") full_name: String,
+        @Query("role") role: String,
+        @Query("age") age: String,
+        @Query("gender") gender: String,
+        @Query("nationality") nationality: String,
+        @Query("user_Id") user_Id: String,
+        @Query("password") password: String
+    ): Response<LeaveApplicationResponse>
 }

@@ -46,6 +46,7 @@
         <entry key="app/src/main/res/layout/activity_leave_application.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/layout/create_employee_bottom_sheet.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/delete_leave_bottom_sheet.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_application.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_employee_profile.xml" value="0.24270833333333333" />
