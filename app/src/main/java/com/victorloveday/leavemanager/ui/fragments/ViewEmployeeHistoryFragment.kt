@@ -8,12 +8,13 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
+import com.victorloveday.leavemanager.database.UserInfoManager
 import com.victorloveday.leavemanager.database.model.HistoryResponse
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.LeaveApplicationResponse
@@ -31,8 +32,7 @@ class ViewEmployeeHistoryFragment : Fragment(R.layout.fragment_history) {
     private lateinit var leaveViewModel: LeaveViewModel
     private lateinit var response: Response<LeaveApplicationResponse>
     private lateinit var historyResponse: Response<HistoryResponse>
-    val args: ViewEmployeeHistoryFragmentArgs by navArgs()
-
+    private lateinit var userInfoManager: UserInfoManager
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,8 +45,8 @@ class ViewEmployeeHistoryFragment : Fragment(R.layout.fragment_history) {
 
 
         historyAdapter = HistoryAdapter(requireContext())
+        userInfoManager = UserInfoManager(requireContext())
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
-
 
         setupHistoryRecyclerView()
         deleteLeave()
@@ -132,17 +132,19 @@ class ViewEmployeeHistoryFragment : Fragment(R.layout.fragment_history) {
         layoutManager = LinearLayoutManager(requireContext())
         setPadding(0, 0, 0, 100)
 
-        leaveViewModel.getAllLeaveHistoryByUserId("5").observe(viewLifecycleOwner, {
+        userInfoManager.userIdFlow.asLiveData().observe(viewLifecycleOwner, { userId ->
+            leaveViewModel.getAllLeaveHistoryByUserId(userId).observe(viewLifecycleOwner, {
 
-            if (it.isNotEmpty()) {
-                historyAdapter.setData(it)
+                if (it.isNotEmpty()) {
+                    historyAdapter.setData(it)
 
-            } else {
-                Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
-            }
+                } else {
+                    Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
+                }
+
+            })
 
         })
-
 
     }
 
@@ -151,27 +153,29 @@ class ViewEmployeeHistoryFragment : Fragment(R.layout.fragment_history) {
 
             val slideFromBottom = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_bottom)
 
-            when(selectedTb) {
-                R.id.tab1 -> {
-                    leaveViewModel.getAllLeaveHistoryByUserId("5").observe(viewLifecycleOwner, {
-                        binding.historyRecyclerView.startAnimation(slideFromBottom)
-                        historyAdapter.setData(it)
-                    })
+            userInfoManager.userIdFlow.asLiveData().observe(viewLifecycleOwner, { userId ->
+                when(selectedTb) {
+                    R.id.tab1 -> {
+                        leaveViewModel.getAllLeaveHistoryByUserId(userId).observe(viewLifecycleOwner, {
+                            binding.historyRecyclerView.startAnimation(slideFromBottom)
+                            historyAdapter.setData(it)
+                        })
+                    }
+                    R.id.tab2 -> {
+                        leaveViewModel.getLeaveHistoryByLeaveTypeAndUserId("Casual", userId).observe(viewLifecycleOwner, {
+                            binding.historyRecyclerView.startAnimation(slideFromBottom)
+                            historyAdapter.setData(it)
+                        })
+                    }
+                    R.id.tab3 -> {
+                        leaveViewModel.getLeaveHistoryByLeaveTypeAndUserId("Sick", userId).observe(viewLifecycleOwner, {
+                            binding.historyRecyclerView.startAnimation(slideFromBottom)
+                            historyAdapter.setData(it)
+                        })
+                    }
                 }
-                R.id.tab2 -> {
-                    leaveViewModel.getLeaveHistoryByLeaveTypeAndUserId("Casual", "5").observe(viewLifecycleOwner, {
-                        binding.historyRecyclerView.startAnimation(slideFromBottom)
-                        historyAdapter.setData(it)
-                    })
-                }
-                R.id.tab3 -> {
-                    leaveViewModel.getLeaveHistoryByLeaveTypeAndUserId("Sick", "5").observe(viewLifecycleOwner, {
-                        binding.historyRecyclerView.startAnimation(slideFromBottom)
-                        historyAdapter.setData(it)
-                    })
-                }
-            }
 
+            })
         }
 
     }

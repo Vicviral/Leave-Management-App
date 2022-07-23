@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 
 class LeaveViewModel(application: Application) : AndroidViewModel(application) {
     val readAllLeaveHistory: LiveData<List<Leave>>
-    val readRecentFiveLeaves: LiveData<List<Leave>>
     val readAllNotification: LiveData<List<Notification>>
     private val leaveRepository: LeaveRepository
 
@@ -27,7 +26,6 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         val leaveDao = UserDatabase.getDatabase(application).leaveDao()
         leaveRepository = LeaveRepository(leaveDao)
         readAllLeaveHistory = leaveRepository.readAllLeaveHistory
-        readRecentFiveLeaves = leaveRepository.readRecentFiveLeaves
         readAllNotification = leaveRepository.readAllNotifications
     }
 
@@ -47,12 +45,16 @@ class LeaveViewModel(application: Application) : AndroidViewModel(application) {
         return leaveRepository.getLeaveHistoryByLeaveTypeAndUserId(leaveType, userId)
     }
 
-    fun getRecentPendingLeave(status: String): LiveData<List<Leave>> {
-        return leaveRepository.getRecentPendingLeave(status)
+    fun getRecentPendingLeave(status: String, userId: String): LiveData<List<Leave>> {
+        return leaveRepository.getRecentPendingLeave(status, userId)
     }
 
-    fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>> {
-        return  leaveRepository.getLeavesByStatusAndType(leaveType, status)
+    fun getRecentFiveLeaves(userId: String): LiveData<List<Leave>> {
+        return leaveRepository.getRecentFiveLeaves(userId)
+    }
+
+    fun getLeavesByStatusAndType(leaveType: String, status: String, userId: String): LiveData<List<Leave>> {
+        return  leaveRepository.getLeavesByStatusAndType(leaveType, status, userId)
     }
 
     fun getAllLeaveHistoryByUserId(userId: String): LiveData<List<Leave>> {

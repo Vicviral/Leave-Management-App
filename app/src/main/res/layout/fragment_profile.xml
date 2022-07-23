@@ -309,7 +309,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/edit_btn_bg"
+                android:background="@drawable/cancel_btn_bg"
                 android:gravity="center"
                 android:visibility="visible">
 
@@ -317,8 +317,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View Leaves"
-                    android:textColor="@color/white"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_baseline_arrow_right_alt_24" />
+
 
             </LinearLayout>
 

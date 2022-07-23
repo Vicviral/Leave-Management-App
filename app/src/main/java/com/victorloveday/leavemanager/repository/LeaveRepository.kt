@@ -9,7 +9,6 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
 
     //return every item on the leave table
     val readAllLeaveHistory: LiveData<List<Leave>> = leaveDao.getAllLeaveHistory()
-    val readRecentFiveLeaves: LiveData<List<Leave>> = leaveDao.getRecentFiveLeaves()
     val readAllNotifications: LiveData<List<Notification>> = leaveDao.getAllNotifications()
 
     suspend fun saveLeave(leave: List<Leave>) {
@@ -24,12 +23,16 @@ class LeaveRepository(private val leaveDao: LeaveDao) {
         return leaveDao.getLeaveHistoryByLeaveTypeAndUserId(leaveType, userId)
     }
 
-    fun getRecentPendingLeave(status: String): LiveData<List<Leave>> {
-        return leaveDao.getRecentPendingLeave(status)
+    fun getRecentPendingLeave(status: String, userId: String): LiveData<List<Leave>> {
+        return leaveDao.getRecentPendingLeave(status, userId)
     }
 
-    fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>> {
-        return leaveDao.getLeavesByStatusAndType(leaveType, status)
+    fun getRecentFiveLeaves(userId: String): LiveData<List<Leave>> {
+        return leaveDao.getRecentFiveLeaves(userId)
+    }
+
+    fun getLeavesByStatusAndType(leaveType: String, status: String, userId: String): LiveData<List<Leave>> {
+        return leaveDao.getLeavesByStatusAndType(leaveType, status, userId)
     }
 
     fun getAllLeaveHistoryByUserId(userId: String): LiveData<List<Leave>> {

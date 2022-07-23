@@ -10,10 +10,12 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.api.RetrofitInstance
+import com.victorloveday.leavemanager.database.UserInfoManager
 import com.victorloveday.leavemanager.database.model.HistoryResponse
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.databinding.FragmentHomeBinding
@@ -32,6 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var historyAdapter: HistoryAdapter
     private lateinit var leaveViewModel: LeaveViewModel
     private lateinit var response: Response<HistoryResponse>
+    private lateinit var userInfoManager: UserInfoManager
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,6 +42,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
         historyAdapter = HistoryAdapter(requireContext())
+        userInfoManager = UserInfoManager(requireContext())
         leaveViewModel = ViewModelProvider(requireActivity()).get(LeaveViewModel::class.java)
 
         displayUserMetrics()
@@ -49,62 +53,67 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun displayUserMetrics() {
 
-        leaveViewModel.getLeavesByStatusAndType("Casual", "Approved").observe(viewLifecycleOwner, {
-            var prefix = "days"
-            if (it.size <= 1) prefix = "day"
-            binding.days1.text = "${it.size} $prefix"
+        userInfoManager.userIdFlow.asLiveData().observe(viewLifecycleOwner, { userId ->
+            leaveViewModel.getLeavesByStatusAndType("Casual", "Approved", userId).observe(viewLifecycleOwner, {
+                var prefix = "days"
+                if (it.size <= 1) prefix = "day"
+                binding.days1.text = "${it.size} $prefix"
 
-            val progressBarValue = 100f / GIVEN_CASUAL_LEAVE.toFloat() * it.size
+                val progressBarValue = 100f / GIVEN_CASUAL_LEAVE.toFloat() * it.size
 
-            val casualLeaveProgressBar = binding.casualLeaveProgressBar
-            casualLeaveProgressBar.apply {
-                progress = progressBarValue
-            }
+                val casualLeaveProgressBar = binding.casualLeaveProgressBar
+                casualLeaveProgressBar.apply {
+                    progress = progressBarValue
+                }
 
-        })
-        leaveViewModel.getLeavesByStatusAndType("Sick", "Approved").observe(viewLifecycleOwner, {
-            var prefix = "days"
-            if (it.size <= 1) prefix = "day"
-            binding.days2.text = "${it.size} $prefix"
+            })
+            leaveViewModel.getLeavesByStatusAndType("Sick", "Approved", userId).observe(viewLifecycleOwner, {
+                var prefix = "days"
+                if (it.size <= 1) prefix = "day"
+                binding.days2.text = "${it.size} $prefix"
 
 
-            val sickLeaveProgressBar = binding.sickLeaveProgressBar
-            sickLeaveProgressBar.apply {
-                progress = it.size.toFloat()
-            }
+                val sickLeaveProgressBar = binding.sickLeaveProgressBar
+                sickLeaveProgressBar.apply {
+                    progress = it.size.toFloat()
+                }
 
-        })
-        leaveViewModel.getLeavesByStatusAndType("Annual", "Approved").observe(viewLifecycleOwner, {
-            var prefix = "days"
-            if (it.size <= 1) prefix = "day"
-            binding.days3.text = "${it.size} $prefix"
+            })
+            leaveViewModel.getLeavesByStatusAndType("Annual", "Approved", userId).observe(viewLifecycleOwner, {
+                var prefix = "days"
+                if (it.size <= 1) prefix = "day"
+                binding.days3.text = "${it.size} $prefix"
 
-            val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat()
+                val progressBarValue = 100f / GIVEN_ANNUAL_LEAVE.toFloat()
 
-            val annualLeaveProgressBar = binding.annualLeaveProgressBar
-            annualLeaveProgressBar.apply {
-                progress = if (it.isEmpty()) 0f else progressBarValue
-            }
+                val annualLeaveProgressBar = binding.annualLeaveProgressBar
+                annualLeaveProgressBar.apply {
+                    progress = if (it.isEmpty()) 0f else progressBarValue
+                }
+
+            })
 
         })
 
     }
 
     private fun displayRecentPendingLeave() = binding.recentLeavesRecyclerView.apply {
-        leaveViewModel.getRecentPendingLeave("Pending").observe(viewLifecycleOwner, {
-            if (it.isNotEmpty()) {
-                val recentPendingLeave = it[0]
-                binding.leaveTittle.text = recentPendingLeave.leave_title
-                binding.leaveType.text = recentPendingLeave.leave_type
-                binding.leaveDescription.text = recentPendingLeave.leave_message
-                binding.leaveStatus.text = recentPendingLeave.status
-                binding.duration.text = recentPendingLeave.leave_duration
+        userInfoManager.userIdFlow.asLiveData().observe(viewLifecycleOwner, { userId ->
+            leaveViewModel.getRecentPendingLeave("Pending", userId).observe(viewLifecycleOwner, {
+                if (it.isNotEmpty()) {
+                    val recentPendingLeave = it[0]
+                    binding.leaveTittle.text = recentPendingLeave.leave_title
+                    binding.leaveType.text = recentPendingLeave.leave_type
+                    binding.leaveDescription.text = recentPendingLeave.leave_message
+                    binding.leaveStatus.text = recentPendingLeave.status
+                    binding.duration.text = recentPendingLeave.leave_duration
 
-                enablePendingLeaveButtons()
-            }else {
-                disablePendingLeaveButtons()
-            }
+                    enablePendingLeaveButtons()
+                }else {
+                    disablePendingLeaveButtons()
+                }
 
+            })
         })
     }
 
@@ -116,17 +125,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         adapter = historyAdapter
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        leaveViewModel.readRecentFiveLeaves.observe(viewLifecycleOwner, {
-            historyAdapter.setData(it)
+        userInfoManager.userIdFlow.asLiveData().observe(viewLifecycleOwner, { userId ->
+            leaveViewModel.getRecentFiveLeaves(userId).observe(viewLifecycleOwner, {
+                historyAdapter.setData(it)
 
-            //animate recycler view position
-            if (it.size > 1) {
-                val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
-                binding.recentLeavesRecyclerView.startAnimation(slideFromRight)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    (layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, -200)
-                }, 200)
-            }
+                //animate recycler view position
+                if (it.size > 1) {
+                    val slideFromRight = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+                    binding.recentLeavesRecyclerView.startAnimation(slideFromRight)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        (layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, -200)
+                    }, 200)
+                }
+            })
         })
 
     }

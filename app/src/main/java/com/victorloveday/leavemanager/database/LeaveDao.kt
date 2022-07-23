@@ -23,14 +23,14 @@ interface LeaveDao {
     @Query("SELECT * FROM leaves_table WHERE `leave_type` = :leaveType AND user_id = :userId")
     fun getLeaveHistoryByLeaveTypeAndUserId(leaveType: String, userId: String): LiveData<List<Leave>>
 
-    @Query("SELECT * FROM leaves_table ORDER BY id DESC LIMIT 5")
-    fun getRecentFiveLeaves(): LiveData<List<Leave>>
+    @Query("SELECT * FROM leaves_table WHERE user_id = :userId ORDER BY id DESC LIMIT 5")
+    fun getRecentFiveLeaves(userId: String): LiveData<List<Leave>>
 
-    @Query("SELECT * FROM leaves_table WHERE `status` = :status ORDER BY id DESC LIMIT 1")
-    fun getRecentPendingLeave(status: String): LiveData<List<Leave>>
+    @Query("SELECT * FROM leaves_table WHERE `status` = :status AND user_id = :userId ORDER BY id DESC LIMIT 1")
+    fun getRecentPendingLeave(status: String, userId: String): LiveData<List<Leave>>
 
-    @Query("SELECT * FROM leaves_table WHERE leave_type = :leaveType AND status = :status ")
-    fun getLeavesByStatusAndType(leaveType: String, status: String): LiveData<List<Leave>>
+    @Query("SELECT * FROM leaves_table WHERE leave_type = :leaveType AND status = :status AND user_id = :userId")
+    fun getLeavesByStatusAndType(leaveType: String, status: String, userId: String): LiveData<List<Leave>>
 
 
     //notifications
