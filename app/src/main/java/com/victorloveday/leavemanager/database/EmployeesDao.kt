@@ -15,4 +15,7 @@ interface EmployeesDao {
     @Query("SELECT * FROM employee_table ORDER BY id DESC")
     fun getAllEmployee(): LiveData<List<User>>
 
+    @Query("SELECT * FROM employee_table WHERE userId = :userId AND password = :password")
+    fun getEmployeeByUserIdAndPassword(userId: String, password:String): LiveData<User>
+
 }

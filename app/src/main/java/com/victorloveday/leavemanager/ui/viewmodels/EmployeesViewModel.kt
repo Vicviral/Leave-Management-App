@@ -27,4 +27,8 @@ class EmployeesViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun getEmployeeByUserIdAndPassword(userId: String, password: String): LiveData<User> {
+        return employeesRepository.getEmployeeByUserIdAndPassword(userId, password)
+    }
+
 }

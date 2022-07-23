@@ -4,12 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.victorloveday.leavemanager.api.RetrofitInstance
 import com.victorloveday.leavemanager.database.UserInfoManager
 import com.victorloveday.leavemanager.database.model.LoginResponse
 import com.victorloveday.leavemanager.databinding.ActivityLoginBinding
 import com.victorloveday.leavemanager.ui.MainActivity
+import com.victorloveday.leavemanager.ui.viewmodels.EmployeesViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -20,14 +25,22 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var response: Response<LoginResponse>
     private lateinit var userInfoManager: UserInfoManager
+    private lateinit var employeeViewModel: EmployeesViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        userInfoManager = UserInfoManager(this)
+        userInfoManager.onLoginFlow.asLiveData().observe(this, {
+            if (it == true) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        })
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userInfoManager = UserInfoManager(this)
+        employeeViewModel = ViewModelProvider(this).get(EmployeesViewModel::class.java)
 
         binding.loginBtn.setOnClickListener {
             validateFields()
@@ -39,10 +52,31 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.password.text.toString()
 
         if (userId.isNotEmpty() || password.isNotEmpty()) {
-            loginUser(userId, password)
+//            loginUser(userId, password)
+            loginUserLocally(userId, password)
         } else {
             Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun loginUserLocally(userId: String, password: String) {
+
+        employeeViewModel.getEmployeeByUserIdAndPassword(userId, password).observe(this, {
+            if (it != null) {
+                if (it.userId == userId && it.password == password) {
+                    GlobalScope.launch {
+                        userInfoManager.storeUser(it.name, it.userId, it.age, it.role, it.userType, it.isOnLeave, it.isDeactivated)
+                        userInfoManager.saveLoginStatus(true)
+                    }
+                    Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+            }else {
+                Toast.makeText(this, "$userId does not exist", Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 
     private fun loginUser(userId: String, password: String) {

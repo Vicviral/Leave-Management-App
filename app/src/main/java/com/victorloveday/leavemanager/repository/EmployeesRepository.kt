@@ -13,4 +13,8 @@ class EmployeesRepository(private val employeesDao: EmployeesDao) {
         employeesDao.saveEmployees(user)
     }
 
+    fun getEmployeeByUserIdAndPassword(userId: String, password: String): LiveData<User> {
+        return employeesDao.getEmployeeByUserIdAndPassword(userId, password)
+    }
+
 }

@@ -19,6 +19,7 @@ class UserInfoManager(context: Context) {
         val USER_TYPE_KEY = preferencesKey<String>("USER_TYPE")
         val USER_ON_LEAVE_KEY = preferencesKey<Boolean>("USER_ON_LEAVE")
         val USER_DEACTIVATED_KEY = preferencesKey<Boolean>("USER_DEACTIVATED")
+        val IS_USER_LOGGED_IN_KEY = preferencesKey<Boolean>("IS_USER_LOGGED_IN")
     }
 
     suspend fun clearUser() {
@@ -39,6 +40,12 @@ class UserInfoManager(context: Context) {
         }
     }
 
+    suspend fun saveLoginStatus(isUserLoggedIn: Boolean) {
+        dataStore.edit {
+            it[IS_USER_LOGGED_IN_KEY] = isUserLoggedIn
+        }
+    }
+
     val nameFlow: Flow<String> = dataStore.data.map {
         it[NAME_KEY] ?: ""
     }
@@ -54,11 +61,15 @@ class UserInfoManager(context: Context) {
     val typeFlow: Flow<String> = dataStore.data.map {
         it[USER_TYPE_KEY] ?: ""
     }
-    val onLeave: Flow<Boolean> = dataStore.data.map {
+    val onLeaveFlow: Flow<Boolean> = dataStore.data.map {
         it[USER_ON_LEAVE_KEY] ?: false
     }
-    val deactivated: Flow<Boolean> = dataStore.data.map {
+    val deactivatedFlow: Flow<Boolean> = dataStore.data.map {
         it[USER_DEACTIVATED_KEY] ?: false
+    }
+
+    val onLoginFlow: Flow<Boolean> = dataStore.data.map {
+        it[IS_USER_LOGGED_IN_KEY] ?: false
     }
 
 }
