@@ -29,18 +29,19 @@ class LoginActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        userInfoManager = UserInfoManager(this)
-        userInfoManager.onLoginFlow.asLiveData().observe(this, {
-            if (it == true) {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        })
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         employeeViewModel = ViewModelProvider(this).get(EmployeesViewModel::class.java)
+        userInfoManager = UserInfoManager(this)
+
+        userInfoManager.onLoginFlow.asLiveData().observe(this, {
+            if (it == true) {
+//                startActivity(Intent(this, MainActivity::class.java))
+//                finish()
+            }
+        })
 
         binding.loginBtn.setOnClickListener {
             validateFields()
@@ -65,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
             if (it != null) {
                 if (it.userId == userId && it.password == password) {
                     GlobalScope.launch {
-                        userInfoManager.storeUser(it.name, it.userId, it.age, it.role, it.userType, it.isOnLeave, it.isDeactivated)
+                        userInfoManager.storeUser(it.name, it.userId, it.age, it.role, it.userType, it.gender, it.nationality, it.isOnLeave, it.isDeactivated)
                         userInfoManager.saveLoginStatus(true)
                     }
                     Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
@@ -109,10 +110,12 @@ class LoginActivity : AppCompatActivity() {
                     val role = result.role
                     val age = result.age
                     val userType = result.userType
+                    val gender = result.gender
+                    val nationality = result.nationality
                     val isOnLeave = result.isOnLeave
                     val isDeactivated = result.isDeactivated
 
-                    userInfoManager.storeUser(name, userID, age, role,userType, isOnLeave, isDeactivated)
+                    userInfoManager.storeUser(name, userID, age, role,userType, gender, nationality, isOnLeave, isDeactivated)
 
                     //navigate to main app
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))

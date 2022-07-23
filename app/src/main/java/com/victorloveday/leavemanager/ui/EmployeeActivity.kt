@@ -93,10 +93,10 @@ class EmployeeActivity : AppCompatActivity() {
 
         if (fullName.isNotEmpty() || role.isNotEmpty() || age.isNotEmpty() || gender.isNotEmpty() || nationality.isNotEmpty() || password.isNotEmpty() || userId.isNotEmpty()) {
             //for demo purpose
-//            val emp1 = User(0, fullName, userId, age, role, gender , nationality, "Employee", false, false, password)
+//            val emp1 = User(0, fullName, userId, age, role, gender , nationality, "Admin", false, false, password)
 //            val emp2 = User(1, "Sani Umar", "sani123", "34", "Sales Manager", "Male" , "Nigeria", "Employee", false, false, "12345")
 //            val emp3 = User(2, "Victor Loveday", "victor123", "20", "Lead Android Engineer", "Male" , "Nigeria", "Employee", true, false, "12345")
-//            val emps : ArrayList<User> = arrayListOf(emp1, emp2, emp3)
+//            val emps : ArrayList<User> = arrayListOf(emp1)
 //            employeesViewModel.saveEmployees(emps)
 //            dialog.dismiss()
 

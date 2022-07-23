@@ -5,6 +5,7 @@ import androidx.datastore.preferences.clear
 import androidx.datastore.preferences.createDataStore
 import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.preferencesKey
+import com.victorloveday.leavemanager.database.model.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -17,6 +18,8 @@ class UserInfoManager(context: Context) {
         val AGE_KEY = preferencesKey<String>("AGE")
         val ROLE_KEY = preferencesKey<String>("ROLE")
         val USER_TYPE_KEY = preferencesKey<String>("USER_TYPE")
+        val GENDER_KEY = preferencesKey<String>("GENDER")
+        val NATION_KEY = preferencesKey<String>("NATION")
         val USER_ON_LEAVE_KEY = preferencesKey<Boolean>("USER_ON_LEAVE")
         val USER_DEACTIVATED_KEY = preferencesKey<Boolean>("USER_DEACTIVATED")
         val IS_USER_LOGGED_IN_KEY = preferencesKey<Boolean>("IS_USER_LOGGED_IN")
@@ -28,13 +31,15 @@ class UserInfoManager(context: Context) {
         }
     }
 
-    suspend fun storeUser(name: String, userId: String, age: String, role: String, userType: String, isOnLeave: Boolean, isDeactivated: Boolean) {
+    suspend fun storeUser(name: String, userId: String, age: String, role: String, userType: String, gender: String, nation: String, isOnLeave: Boolean, isDeactivated: Boolean) {
         dataStore.edit {
             it[NAME_KEY] = name
             it[USER_ID_KEY] = userId
             it[AGE_KEY] = age
             it[ROLE_KEY] = role
             it[USER_TYPE_KEY] = userType
+            it[GENDER_KEY] = gender
+            it[NATION_KEY] = nation
             it[USER_ON_LEAVE_KEY] = isOnLeave
             it[USER_DEACTIVATED_KEY] = isDeactivated
         }
@@ -60,6 +65,12 @@ class UserInfoManager(context: Context) {
     }
     val typeFlow: Flow<String> = dataStore.data.map {
         it[USER_TYPE_KEY] ?: ""
+    }
+    val genderFlow: Flow<String> = dataStore.data.map {
+        it[GENDER_KEY] ?: ""
+    }
+    val nationFlow: Flow<String> = dataStore.data.map {
+        it[NATION_KEY] ?: ""
     }
     val onLeaveFlow: Flow<Boolean> = dataStore.data.map {
         it[USER_ON_LEAVE_KEY] ?: false
