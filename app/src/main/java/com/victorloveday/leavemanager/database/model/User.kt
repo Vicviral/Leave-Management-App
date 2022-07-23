@@ -2,6 +2,7 @@ package com.victorloveday.leavemanager.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity (tableName = "employee_table")
 data class User(
@@ -11,7 +12,9 @@ data class User(
     val userId: String,
     val age: String,
     val role: String,
+    val gender: String,
+    val nationality: String,
     val userType: String,
     val isOnLeave: Boolean,
     val isDeactivated: Boolean
-)
+): Serializable

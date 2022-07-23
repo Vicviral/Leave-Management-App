@@ -7,21 +7,17 @@
     <fragment
         android:id="@+id/employeesFragment"
         android:name="com.victorloveday.leavemanager.ui.fragments.EmployeesFragment"
-        android:label="Manage Employees">
+        android:label="Employees">
         <action
             android:id="@+id/action_employeesFragment_to_viewEmployeeProfileFragment"
             app:destination="@id/viewEmployeeProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewEmployeeProfileFragment"
-        android:name="com.victorloveday.leavemanager.ui.fragments.ProfileFragment"
-        android:label="Employee's Profile">
-        <action
-            android:id="@+id/action_viewEmployeeProfileFragment_to_viewEmployeeHistoryFragment"
-            app:destination="@id/viewEmployeeHistoryFragment" />
+        android:name="com.victorloveday.leavemanager.ui.fragments.ViewEmployeeProfileFragment"
+        android:label="@string/profile">
+        <argument
+            android:name="user"
+            app:argType="com.victorloveday.leavemanager.database.model.User" />
     </fragment>
-    <fragment
-        android:id="@+id/viewEmployeeHistoryFragment"
-        android:name="com.victorloveday.leavemanager.ui.fragments.HistoryFragment"
-        android:label="Employee's History" />
 </navigation>

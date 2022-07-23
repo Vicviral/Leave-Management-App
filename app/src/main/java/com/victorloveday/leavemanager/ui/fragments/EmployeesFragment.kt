@@ -25,13 +25,6 @@ class EmployeesFragment: Fragment(R.layout.fragment_employees) {
         employeesAdapter = EmployeesAdapter(requireContext())
         employeesViewModel = ViewModelProvider(this).get(EmployeesViewModel::class.java)
 
-        binding.employeesRecyclerView.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_employeesFragment_to_viewEmployeeProfileFragment
-            )
-
-        }
-
         setupHistoryRecyclerView()
     }
 
@@ -52,6 +45,17 @@ class EmployeesFragment: Fragment(R.layout.fragment_employees) {
 
         })
 
+
+        employeesAdapter.setOnEmployeeClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("user", it)
+            }
+
+            findNavController().navigate(
+                R.id.action_employeesFragment_to_viewEmployeeProfileFragment,
+                bundle
+            )
+        }
 
     }
 

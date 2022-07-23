@@ -1,7 +1,6 @@
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -65,7 +64,7 @@ class EmployeesAdapter(private val context: Context) :
             holder.itemView.apply {
 
                 setOnClickListener {
-                    onLeaveClickListener?.let {it(employee)}
+                    onEmployeeClickListener?.let {it(employee)}
                 }
 
             }
@@ -78,9 +77,9 @@ class EmployeesAdapter(private val context: Context) :
         notifyDataSetChanged()
     }
 
-    private var onLeaveClickListener: ((User) -> Unit)? = null
+    private var onEmployeeClickListener: ((User) -> Unit)? = null
 
-    fun setOnLeaveClickListener(listener : (User) -> Unit) {
-        onLeaveClickListener = listener
+    fun setOnEmployeeClickListener(listener : (User) -> Unit) {
+        onEmployeeClickListener = listener
     }
     }
