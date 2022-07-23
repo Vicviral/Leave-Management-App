@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.database.UserInfoManager
@@ -28,6 +29,12 @@ class ViewEmployeeProfileFragment : Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
 
         displayReceivedData()
+
+        binding.viewLeaves.setOnClickListener {
+            val userId = args.user.userId
+            val action = ViewEmployeeProfileFragmentDirections.actionViewEmployeeProfileFragmentToViewEmployeeHistoryFragment(userId)
+            findNavController().navigate(action)
+        }
     }
 
     private fun displayReceivedData() {

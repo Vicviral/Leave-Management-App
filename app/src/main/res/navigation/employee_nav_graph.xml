@@ -19,5 +19,16 @@
         <argument
             android:name="user"
             app:argType="com.victorloveday.leavemanager.database.model.User" />
+        <action
+            android:id="@+id/action_viewEmployeeProfileFragment_to_viewEmployeeHistoryFragment"
+            app:destination="@id/viewEmployeeHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewEmployeeHistoryFragment"
+        android:name="com.victorloveday.leavemanager.ui.fragments.ViewEmployeeHistoryFragment"
+        android:label="Leaves">
+        <argument
+            android:name="userId"
+            app:argType="string" />
     </fragment>
 </navigation>
