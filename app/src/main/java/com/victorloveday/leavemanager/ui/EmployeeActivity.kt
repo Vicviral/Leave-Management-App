@@ -64,7 +64,7 @@ class EmployeeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfig)
 
 
-        fetchAllEmployeesDataFromRemoteServer()
+//        fetchAllEmployeesDataFromRemoteServer()
 
         binding.addEmployeeBS.setOnClickListener {
             val dialog = BottomSheetDialog(this)

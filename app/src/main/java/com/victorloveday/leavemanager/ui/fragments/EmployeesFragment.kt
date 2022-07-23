@@ -34,10 +34,10 @@ class EmployeesFragment: Fragment(R.layout.fragment_employees) {
         layoutManager = LinearLayoutManager(requireContext())
         setPadding(0, 0, 0, 100)
 
-        employeesViewModel.readAllEmployees.observe(viewLifecycleOwner, {
+        employeesViewModel.readAllEmployees.observe(viewLifecycleOwner, { employees ->
 
-            if (it.isNotEmpty()) {
-                employeesAdapter.setData(it)
+            if (employees.isNotEmpty()) {
+                employeesAdapter.setData(employees)
 
             } else {
                 Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()

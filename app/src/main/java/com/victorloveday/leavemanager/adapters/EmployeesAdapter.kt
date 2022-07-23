@@ -2,6 +2,7 @@ import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,8 @@ import com.victorloveday.leavemanager.R
 import com.victorloveday.leavemanager.database.model.Leave
 import com.victorloveday.leavemanager.database.model.User
 import com.victorloveday.leavemanager.databinding.ItemEmployeeBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class EmployeesAdapter(private val context: Context) :
     RecyclerView.Adapter<EmployeesAdapter.HistoryViewHolder>() {
@@ -28,6 +31,7 @@ class EmployeesAdapter(private val context: Context) :
 
     private val differ = AsyncListDiffer(this, diffCallback)
     var employees = emptyList<User>()
+//    var employees = ArrayList<User>()
 
     override fun getItemCount() = employees.size
 
@@ -65,6 +69,12 @@ class EmployeesAdapter(private val context: Context) :
 
                 setOnClickListener {
                     onEmployeeClickListener?.let {it(employee)}
+                }
+
+                when(employee.isDeactivated) {
+                    true -> {
+                        setBackgroundColor(Color.parseColor("#22F76332"))
+                    }
                 }
 
             }
