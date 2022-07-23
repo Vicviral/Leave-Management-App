@@ -138,7 +138,6 @@
                 android:gravity="top"
                 android:hint="e.g: I'll need to travel for my only sister's wedding."
                 android:padding="5dp"
-                android:singleLine="false"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
