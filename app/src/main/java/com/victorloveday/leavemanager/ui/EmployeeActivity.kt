@@ -109,8 +109,11 @@ class EmployeeActivity : AppCompatActivity() {
 //                        age,
 //                        gender,
 //                        nationality,
+//                        "Employee",
 //                        userId,
-//                        password
+//                        password,
+//                        false,
+//                        isDeactivated = false
 //                    )
 //
 //                } catch (e: IOException) {
@@ -130,8 +133,6 @@ class EmployeeActivity : AppCompatActivity() {
 //                if (addEmployeeResponse.isSuccessful && addEmployeeResponse.body() != null) {
 //
 //                    if (addEmployeeResponse.body()!!.status == 1) {
-//                        //leave has been successfully removed from remote server
-//                        //remove leave from local db
 //                        dialog.dismiss()
 //                        Toast.makeText(this@EmployeeActivity, "Successfully Added", Toast.LENGTH_SHORT).show()
 //

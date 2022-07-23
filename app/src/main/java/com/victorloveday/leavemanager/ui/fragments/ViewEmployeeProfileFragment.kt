@@ -3,16 +3,26 @@ package com.victorloveday.leavemanager.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.victorloveday.leavemanager.R
+import com.victorloveday.leavemanager.database.UserInfoManager
 import com.victorloveday.leavemanager.databinding.FragmentProfileBinding
 
 class ViewEmployeeProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var userInfoManager: UserInfoManager
     val args: ViewEmployeeProfileFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        userInfoManager = UserInfoManager(requireContext())
+        userInfoManager.typeFlow.asLiveData().observe(requireActivity(), {
+            if (it == "Admin") {
+                binding.viewLeaves.visibility = View.VISIBLE
+                binding.deactivateAccount.visibility = View.VISIBLE
+            }
+        })
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
 

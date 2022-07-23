@@ -63,7 +63,10 @@ interface LeaveApi {
         @Query("age") age: String,
         @Query("gender") gender: String,
         @Query("nationality") nationality: String,
+        @Query("user_type") user_type: String,
         @Query("user_Id") user_Id: String,
-        @Query("password") password: String
+        @Query("password") password: String,
+        @Query("isOnLeave") isOnLeave: Boolean,
+        @Query("isDeactivated") isDeactivated: Boolean,
     ): Response<LeaveApplicationResponse>
 }

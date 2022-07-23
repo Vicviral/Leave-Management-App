@@ -16,5 +16,6 @@ data class User(
     val nationality: String,
     val userType: String,
     val isOnLeave: Boolean,
-    val isDeactivated: Boolean
+    val isDeactivated: Boolean,
+    val password: String
 ): Serializable
