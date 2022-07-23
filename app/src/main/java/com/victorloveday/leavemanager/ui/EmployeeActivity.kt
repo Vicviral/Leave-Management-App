@@ -94,55 +94,58 @@ class EmployeeActivity : AppCompatActivity() {
         if (fullName.isNotEmpty() || role.isNotEmpty() || age.isNotEmpty() || gender.isNotEmpty() || nationality.isNotEmpty() || password.isNotEmpty() || userId.isNotEmpty()) {
             //for demo purpose
 //            val emp1 = User(0, fullName, userId, age, role, "Employee" , false, false)
-//            val emps : ArrayList<User> = arrayListOf(emp1)
+//            val emp2 = User(1, "Sani Umar", "sani123", "34", "Sales Manager", "Employee" , true, false)
+//            val emp3 = User(2, "Bagi Joseph", "bagi123", "22", "Social Media Manager", "Employee" , false, false)
+//            val emps : ArrayList<User> = arrayListOf(emp1, emp2, emp3)
 //            employeesViewModel.saveEmployees(emps)
+//            dialog.dismiss()
 
-            lifecycleScope.launchWhenCreated {
-                addEmployeeResponse = try {
-                    RetrofitInstance.api.addEmployee(
-                        "",
-                        fullName,
-                        role,
-                        age,
-                        gender,
-                        nationality,
-                        userId,
-                        password
-                    )
-
-                } catch (e: IOException) {
-                    Toast.makeText(this@EmployeeActivity, "Check your internet and try again...", Toast.LENGTH_SHORT).show()
-
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Toast.makeText(this@EmployeeActivity, "Check your internet and try again...", Toast.LENGTH_SHORT).show()
-
-                    return@launchWhenCreated
-                } catch (e: SocketTimeoutException) {
-                    Toast.makeText(this@EmployeeActivity, "Check your internet and try again...", Toast.LENGTH_SHORT).show()
-
-                    return@launchWhenCreated
-                }
-
-                if (addEmployeeResponse.isSuccessful && addEmployeeResponse.body() != null) {
-
-                    if (addEmployeeResponse.body()!!.status == 1) {
-                        //leave has been successfully removed from remote server
-                        //remove leave from local db
-                        dialog.dismiss()
-                        Toast.makeText(this@EmployeeActivity, "Successfully Added", Toast.LENGTH_SHORT).show()
-
-                    } else {
-                        Toast.makeText(this@EmployeeActivity, "Failed ${addEmployeeResponse.body()}", Toast.LENGTH_SHORT).show()
-                    }
-
-                } else {
-                    Toast.makeText(this@EmployeeActivity, "Failed: ${addEmployeeResponse.body()?.status}", Toast.LENGTH_SHORT).show()
-
-                    return@launchWhenCreated
-                }
-
-            }
+//            lifecycleScope.launchWhenCreated {
+//                addEmployeeResponse = try {
+//                    RetrofitInstance.api.addEmployee(
+//                        "",
+//                        fullName,
+//                        role,
+//                        age,
+//                        gender,
+//                        nationality,
+//                        userId,
+//                        password
+//                    )
+//
+//                } catch (e: IOException) {
+//                    Toast.makeText(this@EmployeeActivity, "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+//
+//                    return@launchWhenCreated
+//                } catch (e: HttpException) {
+//                    Toast.makeText(this@EmployeeActivity, "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+//
+//                    return@launchWhenCreated
+//                } catch (e: SocketTimeoutException) {
+//                    Toast.makeText(this@EmployeeActivity, "Check your internet and try again...", Toast.LENGTH_SHORT).show()
+//
+//                    return@launchWhenCreated
+//                }
+//
+//                if (addEmployeeResponse.isSuccessful && addEmployeeResponse.body() != null) {
+//
+//                    if (addEmployeeResponse.body()!!.status == 1) {
+//                        //leave has been successfully removed from remote server
+//                        //remove leave from local db
+//                        dialog.dismiss()
+//                        Toast.makeText(this@EmployeeActivity, "Successfully Added", Toast.LENGTH_SHORT).show()
+//
+//                    } else {
+//                        Toast.makeText(this@EmployeeActivity, "Failed ${addEmployeeResponse.body()}", Toast.LENGTH_SHORT).show()
+//                    }
+//
+//                } else {
+//                    Toast.makeText(this@EmployeeActivity, "Failed: ${addEmployeeResponse.body()?.status}", Toast.LENGTH_SHORT).show()
+//
+//                    return@launchWhenCreated
+//                }
+//
+//            }
 
         }else {
             Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
