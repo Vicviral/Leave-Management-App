@@ -21,6 +21,7 @@ class ViewEmployeeProfileFragment : Fragment(R.layout.fragment_profile) {
             if (it == "Admin") {
                 binding.viewLeaves.visibility = View.VISIBLE
                 binding.deactivateAccount.visibility = View.VISIBLE
+                binding.passwordLayout.visibility = View.VISIBLE
             }
         })
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +36,7 @@ class ViewEmployeeProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.age.text = args.user.age
         binding.gender.text = args.user.gender
         binding.nationality.text = args.user.nationality
+        binding.password.text = args.user.password
     }
 
 }
