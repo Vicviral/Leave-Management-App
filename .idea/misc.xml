@@ -31,9 +31,11 @@
         <entry key="app/src/main/res/drawable/history_tab_unselected.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_date_range_24.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/ic_female_profile.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_history_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_home_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_home_unselected_icon.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/drawable/ic_male_profile.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_notification_selected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_notification_unselected_icon.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_profile_selected_icon.xml" value="0.25885416666666666" />

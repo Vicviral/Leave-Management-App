@@ -44,6 +44,11 @@ class ViewEmployeeProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.gender.text = args.user.gender
         binding.nationality.text = args.user.nationality
         binding.password.text = args.user.password
+
+        when(args.user.gender) {
+            "Male" -> binding.profilePic.setImageResource(R.drawable.ic_male_profile)
+            "Female" -> binding.profilePic.setImageResource(R.drawable.ic_female_profile)
+        }
     }
 
 }

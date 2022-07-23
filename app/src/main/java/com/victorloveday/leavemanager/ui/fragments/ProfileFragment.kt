@@ -20,6 +20,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         userInfoManager = UserInfoManager(requireContext())
         displayLoggedInUserData()
 
+        userInfoManager.genderFlow.asLiveData().observe(viewLifecycleOwner, {
+            when(it) {
+                "Male" -> binding.profilePic.setImageResource(R.drawable.ic_male_profile)
+                "Female" -> binding.profilePic.setImageResource(R.drawable.ic_female_profile)
+            }
+        })
+
     }
 
 
